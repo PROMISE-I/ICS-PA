@@ -14,7 +14,7 @@ void set_PF(uint32_t res)
     uint32_t i = 0;
     for(; i < 8; i++)
     {
-        flag = flag ^ ((res << (31 - i)) & (0x10000000));
+        flag = flag ^ ((res << (31 - i)) & (0x80000000));
     }
     cpu.eflags.PF = flag;
 }
