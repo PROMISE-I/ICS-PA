@@ -92,7 +92,7 @@ uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)
     printf("pre-CF: %x\n", cpu.eflags.CF);
     uint32_t res1 = src + dest;
     printf("res1: %x\n", res1);
-	uint32_t res = res1 + cpu.eflags.CF;
+	uint32_t res = res1 + (uint32_t)cpu.eflags.CF;
 	
 	set_CF_adc(res, src, dest, data_size);
 	set_PF(res);
