@@ -12,7 +12,7 @@ void set_CF_adc(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
 {
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
-    cpu.eflags.CF = (res < src) || (((src + dest) == 0xFFFFFFFF) && (cpu.eflags.CF == 1));
+    cpu.eflags.CF = (res <= src) && (dest != 0);
 }
 
 void set_PF(uint32_t res)
