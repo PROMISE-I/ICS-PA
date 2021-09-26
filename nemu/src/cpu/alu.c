@@ -322,13 +322,14 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_shr(src, dest, data_size);
 #else
 	uint32_t res = dest >> ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
+	uint32_t standard_res = __ref_alu_shr(src, dest, data_size);
 	
 	cpu.eflags.CF = ((res >> 1) & 1);
 	res = res >> 1;
 	set_PF(res);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
-    printf("in shl: res: %x, src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
+    printf("in shl: res: %x, src: %x, dest: %x, CF: %x, standard res: %x\n", res, src, dest, cpu.eflags.CF, standard_res);
 	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
