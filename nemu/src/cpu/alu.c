@@ -306,7 +306,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 #else
 	uint32_t res = dest << ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
 	
-	cpu.eflags.CF = res >> (data_size - 1);
+	cpu.eflags.CF = (res >> (data_size - 1)) & 1;
 	res = res << 1;
 	set_PF(res);
 	set_ZF(res, data_size);
@@ -321,10 +321,15 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_shr(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	uint32_t res = dest >> ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
+	
+	cpu.eflags.CF = res >> (data_size - 1);
+	res = res << 1;
+	set_PF(res);
+	set_ZF(res, data_size);
+	set_SF(res, data_size);
+	//printf("in shl: res: %x, src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
