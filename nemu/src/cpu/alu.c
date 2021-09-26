@@ -2,12 +2,12 @@
 
 void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
 {
-    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)));
-    src = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)));
-    cpu.eflags.CF = result < src;
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    src = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    cpu.eflags.CF = res < src;
 }
 
-void set_PF(uint32_t res, size_t data_size)
+void set_PF(uint32_t res)
 {
     uint32_t flag = 1;
     uint32_t i = 0;
@@ -28,6 +28,31 @@ void set_SF(uint32_t res, size_t data_size)
 {
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     cpu.eflags.SF = sign(res);
+}
+
+void set_OF_add(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
+{
+    switch(data_size){
+        case 8:
+              res = sign_ext(res & 0xFF, 8);
+              src = sign_ext(src & 0xFF, 8);
+              dest = sign_ext(dest & 0xFF, 8);
+              break;
+        case 16:
+              res = sign_ext(res & 0xFFFF, 16);
+              src = sign_ext(src & 0xFFFF, 16);
+              dest = sign_ext(dest & 0xFFFF, 16);
+              breakl
+        default: break;
+    }
+    if(sign(src) == sign(dest)){
+        if(sign(src) != sign(res))
+            cpu.eflags.OF = 1;
+        else
+            cpu.eflags.OF = 0;
+    }else{
+        cpu.eflags.OF = 0;
+    }
 }
 
 uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)
