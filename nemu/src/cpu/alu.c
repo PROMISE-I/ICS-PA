@@ -304,7 +304,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_shl(src, dest, data_size);
 #else
-	uint32_t res = dest << (src & (0xFFFFFFFF >> (32 - data_size)) - 1);
+	uint32_t res = dest << ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
 	
 	cpu.eflags.CF = res >> 31;
 	res = res << 1;
