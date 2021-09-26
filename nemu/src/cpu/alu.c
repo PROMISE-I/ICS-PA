@@ -1,4 +1,5 @@
 #include "cpu/cpu.h"
+#include <stdlib.h>
 
 void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
 {
