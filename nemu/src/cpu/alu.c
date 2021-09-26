@@ -213,9 +213,9 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	dest_64 = dest_64 & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
 	
 	int64_t res = dest_64 * src_64;
-	//res = res & 0xFFFFFFFF;
+	
     printf("in imul: res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", res, src_64, dest_64, __ref_alu_imul(src, dest, data_size));
-    return res;
+    return res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 #endif
 }
 
