@@ -195,7 +195,7 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 	cpu.eflags.OF = ((res >> data_size) != 0);
 	cpu.eflags.CF = cpu.eflags.OF;
 	
-	return res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
+	return res// & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 #endif
 }
 
