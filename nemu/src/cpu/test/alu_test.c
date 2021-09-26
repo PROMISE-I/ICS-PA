@@ -68,7 +68,6 @@ typedef union {
 	uint32_t res, res_asm, res_eflags;\
 	TEST_EFLAGS test_eflags;\
 	res = alu_func(b, a, dataSize);\
-	printf("res: %x, src: %x", res, )
 	asm (	asm_instr \
 	assert_res_CPSZO(dataSize)
 
@@ -106,8 +105,11 @@ void alu_test_add() {
 		for(j = 0 ; j < n ; j++) {
 			a = input[i];
 			b = input[j];
+			printf("32: res: %x, src: %x\n", alu_add(a, b, 32), a);
 			{internel_alu_test_CPSZO(alu_add, 32, "addl %%ecx, %%eax;")}
+			printf("16: res: %x, src: %x\n", alu_add(a, b, 16), a);
 			{internel_alu_test_CPSZO(alu_add, 16, "addw %%cx, %%ax;")}
+			printf("8: res: %x, src: %x\n", alu_add(a, b, 8), a);
 			{internel_alu_test_CPSZO(alu_add, 8 , "addb %%cl, %%al;")}
 		}
 	}
