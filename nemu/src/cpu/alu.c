@@ -340,10 +340,16 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_sar(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	int32_t signed_dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	int32_t signed_res = signed_dest >> ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
+	
+	cpu.eflags.CF = (res & 1);
+	uint32_t res = signed_res >> 1;
+	set_PF(res);
+	set_ZF(res, data_size);
+	set_SF(res, data_size);
+    //printf("in shl: res: %x, src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
