@@ -306,7 +306,7 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)
 #else
 	uint32_t res = dest << ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
 	
-	cpu.eflags.CF = res >> 31;
+	cpu.eflags.CF = res >> (data_size - 1);
 	res = res << 1;
 	set_PF(res);
 	set_ZF(res, data_size);
