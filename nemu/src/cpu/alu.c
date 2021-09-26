@@ -3,9 +3,9 @@
 void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
 {
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
-    src = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
     cpu.eflags.CF = (res < src);
-    printf("res: %x, src: %x, CF: %x\n", res, src, cpu.eflags.CF);
+    //printf("res: %x, src: %x, CF: %x\n", res, src, cpu.eflags.CF);
 }
 
 void set_PF(uint32_t res)
@@ -64,7 +64,7 @@ uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)
 	uint32_t res = 0;
 	res = src + dest;
 	
-	printf("in add: res: %x, src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
+	//printf("in add: res: %x, src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
 	set_CF_add(res, src, data_size);
 	set_PF(res);
 	set_ZF(res, data_size);
