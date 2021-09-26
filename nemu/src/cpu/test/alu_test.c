@@ -105,7 +105,7 @@ void alu_test_add() {
 		for(j = 0 ; j < n ; j++) {
 			a = input[i];
 			b = input[j];
-			printf("32: res: %x, src: %x, dest: %x\n, CF: %x", alu_add(a, b, 32), a, b, cpu.eflags.CF);
+			printf("32: res: %x, src: %x, dest: %x, CF: %x\n", alu_add(a, b, 32), a, b, cpu.eflags.CF);
 			{internel_alu_test_CPSZO(alu_add, 32, "addl %%ecx, %%eax;")}
 			printf("16: res: %x, src: %x, dest: %x\n", alu_add(a, b, 16), a, b);
 			{internel_alu_test_CPSZO(alu_add, 16, "addw %%cx, %%ax;")}
