@@ -73,6 +73,31 @@ void set_CF_sub(uint32_t res, uint32_t dest, size_t data_size)
     cpu.eflags.CF = (res > dest);
 }
 
+void set_OF_sub(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
+{
+    switch(data_size){
+        case 8:
+              res = sign_ext(res & 0xFF, 8);
+              src = sign_ext(src & 0xFF, 8);
+              dest = sign_ext(dest & 0xFF, 8);
+              break;
+        case 16:
+              res = sign_ext(res & 0xFFFF, 16);
+              src = sign_ext(src & 0xFFFF, 16);
+              dest = sign_ext(dest & 0xFFFF, 16);
+              break;
+        default: break;
+    }
+    if(sign(src) != sign(dest)){
+        if(sign(dest) != sign(res))
+            cpu.eflags.OF = 1;
+        else
+            cpu.eflags.OF = 0;
+    }else{
+        cpu.eflags.OF = 0;
+    }
+}
+
 uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
@@ -122,7 +147,7 @@ uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
 	set_OF_add(res, src, dest, data_size);
-	printf("in sub: res: %x, src: %x, dest: %x, OF: %x\n", res, src, dest, cpu.eflags.OF);
+	//printf("in sub: res: %x, src: %x, dest: %x, OF: %x\n", res, src, dest, cpu.eflags.OF);
 	
 	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
