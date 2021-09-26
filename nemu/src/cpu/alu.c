@@ -88,10 +88,14 @@ uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_adc(src, dest, data_size);
 #else
-	src = src + cpu.eflags.CF;
-	uint32_t res = alu_add(src, dest, data_size);
-    printf("in adc: res: %x src: %x, dest: %x, CF: %x\n",res, src, dest, cpu.eflags.CF);
-    return res;
+	uint32_t res = src + dest + cpu.eflags.CF;
+	set_CF_adc(res, src, data_size);
+	set_PF(res);
+	set_ZF(res, data_size);
+	set_SF(res, data_size);
+	set_OF_add(res, src, dest, data_size);
+	
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
