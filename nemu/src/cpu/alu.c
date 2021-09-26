@@ -168,9 +168,9 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_sbb(src, dest, data_size);
 #else
-	uint32_t = dest - src - cpu.eflags.CF;
+	uint32_t res = dest - src - cpu.eflags.CF;
 	
-	set_CF_sbb();
+	set_CF_sbb(res, src, dest, data_size);
 	set_PF(res);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
