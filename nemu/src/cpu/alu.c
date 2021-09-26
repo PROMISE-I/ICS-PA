@@ -219,7 +219,7 @@ uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 	return __ref_alu_div(src, dest, data_size);
 #else
     //if(src == 0) exit(-1);
-    printf("in div: src: %x, dest: %x", src, dest);
+    printf("in div: src: %xl, dest: %xl", src, dest);
 	src = src & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 	dest = dest & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 	
