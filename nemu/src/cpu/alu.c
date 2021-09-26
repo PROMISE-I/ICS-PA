@@ -17,6 +17,7 @@ void set_PF(uint32_t res)
         flag = flag ^ ((res << (31 - i)) & (0x80000000));
     }
     cpu.eflags.PF = flag;
+    printf("res: %x, PF: %x\n", res, cpu.eflags.PF);
 }
 
 void set_ZF(uint32_t res, size_t data_size)
