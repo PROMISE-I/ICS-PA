@@ -68,6 +68,7 @@ typedef union {
 	uint32_t res, res_asm, res_eflags;\
 	TEST_EFLAGS test_eflags;\
 	res = alu_func(b, a, dataSize);\
+	printf("res: %x, src: %x", res, )
 	asm (	asm_instr \
 	assert_res_CPSZO(dataSize)
 
