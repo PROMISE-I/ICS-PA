@@ -205,10 +205,25 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_imul(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	int64_t res = src * dest;
+	
+	uint32_t sign_res = (res >> 31) & 1;
+	uint32_t i;
+	
+	for(i = data_size; i < 2 * data_size; i++)
+    {
+        if(((res >> i) & 1) != sign_res)
+        {
+            cpu.eflags.CF = 1;
+            cpu.eflags.OF = 1;
+        }
+    }	
+    cpu.eflags.CF = 0;
+    cpu.eflags.OF = 0;
+    
+    return res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 #endif
 }
 
