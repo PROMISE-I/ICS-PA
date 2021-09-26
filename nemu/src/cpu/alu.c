@@ -42,7 +42,7 @@ void set_OF_add(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
               res = sign_ext(res & 0xFFFF, 16);
               src = sign_ext(src & 0xFFFF, 16);
               dest = sign_ext(dest & 0xFFFF, 16);
-              breakl
+              break;
         default: break;
     }
     if(sign(src) == sign(dest)){
