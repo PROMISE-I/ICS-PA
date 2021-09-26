@@ -206,8 +206,12 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	return __ref_alu_imul(src, dest, data_size);
 #else
     //printf("pre: src: %x, dest: %x\n", src, dest);
-	int64_t src_64 = ((int64_t)sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size)) & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
-	int64_t dest_64 = ((int64_t)sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size)) & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+	int64_t src_64 = (int64_t)sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size));
+	int64_t dest_64 = (int64_t)sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	
+	src_64 = src_64 & ((0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+	dest_64 = dest_64 & ((0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+	
 	int64_t res = dest_64 * src_64;
 	//res = res & 0xFFFFFFFF;
     printf("in imul: res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", res, src_64, dest_64, __ref_alu_imul(src, dest, data_size));
