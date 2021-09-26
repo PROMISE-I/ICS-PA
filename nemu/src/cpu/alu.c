@@ -195,7 +195,7 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 	cpu.eflags.OF = ((res >> data_size) != 0);
 	cpu.eflags.CF = cpu.eflags.OF;
 	
-	return res;// & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
+	return res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));//测试用例在这里都是32位；
 #endif
 }
 
@@ -217,10 +217,11 @@ uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_div(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	src = src & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
+	dest = dest & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
+	
+	uint32_t res = dest / src;
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
@@ -242,10 +243,8 @@ uint32_t alu_mod(uint64_t src, uint64_t dest)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_mod(src, dest);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	uint32_t res = dest % src;
+	return res;
 #endif
 }
 
