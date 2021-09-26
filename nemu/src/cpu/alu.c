@@ -5,6 +5,7 @@ void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     src = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     cpu.eflags.CF = (res < src);
+    printf("res: %x, src: %x, CF: %x", res, src, cpu.eflags.CF);
 }
 
 void set_PF(uint32_t res)
