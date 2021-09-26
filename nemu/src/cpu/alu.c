@@ -13,7 +13,7 @@ void set_CF_adc(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
     dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
-    cpu.eflags.CF = (res <= src) && (dest != 0);
+    cpu.eflags.CF = (res < src) || (dest != 0 && res == src);
     printf("in adc: res: %x src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
 }
 
