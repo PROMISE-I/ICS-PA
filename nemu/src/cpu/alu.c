@@ -8,7 +8,7 @@ void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
     //printf("res: %x, src: %x, CF: %x\n", res, src, cpu.eflags.CF);
 }
 
-void set_CF_adc(uint32_t res, uint32_t src, uint32_t, dest, size_t data_size)
+void set_CF_adc(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
 {
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
