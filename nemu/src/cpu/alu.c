@@ -13,6 +13,7 @@ void set_CF_adc(uint32_t res, uint32_t src, uint32_t dest, size_t data_size)
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
     cpu.eflags.CF = (res <= src) && (dest != 0);
+    printf("in adc: res: %x src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
 }
 
 void set_PF(uint32_t res)
@@ -89,16 +90,13 @@ uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_adc(src, dest, data_size);
 #else
     printf("pre-CF: %x\n", cpu.eflags.CF);
-    uint32_t extra_CF;
-    if(cpu.eflags.CF == 1)  extra_CF = 1;
-    else extra_CF = 0;
-	uint32_t res = src + dest + extra_CF;
+	uint32_t res = src + dest + cpu.eflags.CF;
 	set_CF_adc(res, src, dest, data_size);
 	set_PF(res);
 	set_ZF(res, data_size);
 	set_SF(res, data_size);
 	set_OF_add(res, src, dest, data_size);
-	printf("in adc: res: %x src: %x, dest: %x, CF: %x\n", res, src, dest, cpu.eflags.CF);
+	
 	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
