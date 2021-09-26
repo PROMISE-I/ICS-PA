@@ -260,12 +260,12 @@ uint32_t alu_and(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_and(src, dest, data_size);
 #else
 	uint32_t res = (src & dest);
-	printf("in and: res: %x, src: %x, dest: %x\n", res, src, dest);
+	//printf("in and: res: %x, src: %x, dest: %x\n", res, src, dest);
 	set_SF(res, data_size);
 	set_ZF(res, data_size);
 	set_PF(res);
 	
-	return res;
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
