@@ -222,7 +222,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
     }	
     cpu.eflags.CF = 0;
     cpu.eflags.OF = 0;
-    
+    printf("in imul: res: %llx, src: %x, dest: %x", res, src, dest);
     return res;
 #endif
 }
