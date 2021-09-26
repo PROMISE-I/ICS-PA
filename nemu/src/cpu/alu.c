@@ -212,6 +212,8 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	
 	uint32_t sign_res = (res >> data_size) & 1;
 	uint32_t i;
+	cpu.eflags.CF = 0;
+    cpu.eflags.OF = 0;
 	
 	for(i = data_size; i < 2 * data_size; i++)
     {
@@ -221,8 +223,6 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
             cpu.eflags.OF = 1;
         }
     }	
-    cpu.eflags.CF = 0;
-    cpu.eflags.OF = 0;
     //printf("in imul: res: %llx, src: %x, dest: %x, std_res: %llx\n", res, src, dest, __ref_alu_imul(src, dest, data_size));
     return res;
 #endif
