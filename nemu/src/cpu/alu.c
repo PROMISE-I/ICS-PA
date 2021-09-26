@@ -274,10 +274,13 @@ uint32_t alu_xor(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_xor(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+    uint32_t res = (src ^ dest);
+	
+	set_SF(res, data_size);
+	set_ZF(res, data_size);
+	set_PF(res);
+	
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
@@ -287,13 +290,12 @@ uint32_t alu_or(uint32_t src, uint32_t dest, size_t data_size)
 	return __ref_alu_or(src, dest, data_size);
 #else
 	uint32_t res = (src | dest);
-	//printf("in and: res: %x, src: %x, dest: %x\n", res, src, dest);
+	
 	set_SF(res, data_size);
 	set_ZF(res, data_size);
 	set_PF(res);
 	
 	return res & (0xFFFFFFFF >> (32 - data_size));
-	return 0;
 #endif
 }
 
