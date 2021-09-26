@@ -185,10 +185,17 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_mul(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	uint64_t src_ext = src;
+	uint64_t dest_ext = dest;
+	
+	src_ext = src_ext & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+	dest_ext = dest_ext & (0xFFFFFFFFFFFFFFFF >> (64 - data_size));
+	
+	uint64_t res = src_ext * dest_ext;
+	cpu.eflags.OF = ((res >> data_size) != 0);
+	cpu.eflags.CF = cpu.eflags.OF;
+	
+	return res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
 #endif
 }
 
