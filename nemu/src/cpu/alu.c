@@ -1,14 +1,49 @@
 #include "cpu/cpu.h"
 
+void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
+{
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)));
+    src = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)));
+    cpu.eflags.CF = result < src;
+}
+
+void set_PF(uint32_t res, size_t data_size)
+{
+    uint32_t flag = 1;
+    uint32_t i = 0;
+    for(; i < 8; i++)
+    {
+        flag = flag ^ ((res << (31 - i)) & (0x10000000));
+    }
+    cpu.eflags.PF = flag;
+}
+
+void set_ZF(uint32_t res, size_t data_size)
+{
+    res = res & (0xFFFFFFFF >> (32 - data_size));
+    cpu.eflags.ZF = (res == 0);
+}
+
+void set_SF(uint32_t res, size_t data_size)
+{
+    res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    cpu.eflags.SF = sign(res);
+}
+
 uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)
 {
 #ifdef NEMU_REF_ALU
 	return __ref_alu_add(src, dest, data_size);
 #else
-	printf("\e[0;31mPlease implement me at alu.c\e[0m\n");
-	fflush(stdout);
-	assert(0);
-	return 0;
+	uint32_t res = src + dest;
+	
+	set_CF_add(res, src, data_size);
+	set_PF(res);
+	set_ZF(res, data_size);
+	set_SF(res, data_size);
+	set_OF_add(res, src, dest, data_size);
+	
+	return res & (0xFFFFFFFF >> (32 - data_size));
 #endif
 }
 
@@ -205,3 +240,4 @@ uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 	return 0;
 #endif
 }
+
