@@ -343,7 +343,7 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 	int32_t signed_dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
 	int32_t signed_res = signed_dest >> ((src & (0xFFFFFFFF >> (32 - data_size))) - 1);
 	
-	cpu.eflags.CF = (res & 1);
+	cpu.eflags.CF = (signed_res & 1);
 	uint32_t res = signed_res >> 1;
 	set_PF(res);
 	set_ZF(res, data_size);
