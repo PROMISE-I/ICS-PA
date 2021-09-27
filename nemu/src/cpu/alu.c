@@ -261,11 +261,11 @@ int32_t alu_idiv(int64_t src, int64_t dest, size_t data_size)
 	return __ref_alu_idiv(src, dest, data_size);
 #else
 	if(src == 0) exit(-1);
-	/*if(data_size != 32)
+	if(data_size != 32)//为什么不符号扩展也可以过？
 	{
 	    dest = sign_ext_64_my(dest, data_size * 2);
 	}
-	src = sign_ext_64_my(src, data_size);*/
+	src = sign_ext_64_my(src, data_size);
 	
 	return (dest / src) & (0xFFFFFFFF >> (32 - data_size));
 	
