@@ -1,7 +1,7 @@
 #include "cpu/cpu.h"
 #include <stdlib.h>
 
-int64_t sign_ext_64(int32_t src, size_t data_size)
+int64_t sign_ext_64_my(int32_t src, size_t data_size)
 {
     assert(data_size == 8 || data_size == 16 || data_size == 32);
     switch(data_size){
@@ -220,8 +220,8 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	return __ref_alu_imul(src, dest, data_size);
 #else
     //if(data_size == 32) printf("pre: src: %x, dest: %x\n", src, dest);
-	int64_t src_ext = sign_ext_64(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	int64_t dest_ext = sign_ext_64(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	int64_t src_ext = sign_ext_64_my(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	int64_t dest_ext = sign_ext_64_my(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
 	int64_t res;
 	
 	src_ext = src_ext & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
