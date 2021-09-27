@@ -1,7 +1,7 @@
 #include "cpu/cpu.h"
 #include <stdlib.h>
 
-int int64_t sign_ext_64(int32_t src, size_t data_size)
+int64_t sign_ext_64(int32_t src, size_t data_size)
 {
     assert(data_size == 8 || data_size == 16 || data_size == 32);
     switch(data_size){
