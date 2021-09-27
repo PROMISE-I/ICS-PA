@@ -1,6 +1,20 @@
 #include "cpu/cpu.h"
 #include <stdlib.h>
 
+int int64_t sign_ext_64(int32_t src, size_t data_size)
+{
+    assert(data_size == 8 || data_size == 16 || data_size == 32);
+    switch(data_size){
+        case 8:
+            return (int64_t)(int8_t)(src & 0xFF);
+        case 16:
+            return (int64_t)(int16_t)(src & 0xFFFF);
+        default: 
+            return (int64_t)(int32_t)(src & 0xFFFFFFFF);
+    }    
+}
+
+
 void set_CF_add(uint32_t res, uint32_t src, size_t data_size)
 {
     res = sign_ext(res & (0xFFFFFFFF >> (32 - data_size)), data_size);
@@ -205,9 +219,9 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 #ifdef NEMU_REF_ALU
 	return __ref_alu_imul(src, dest, data_size);
 #else
-    if(data_size == 32) printf("pre: src: %x, dest: %x\n", src, dest);
-	int64_t src_ext = (int64_t)sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
-	int64_t dest_ext = (int64_t)sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
+    //if(data_size == 32) printf("pre: src: %x, dest: %x\n", src, dest);
+	int64_t src_ext = sign_ext_64(src & (0xFFFFFFFF >> (32 - data_size)), data_size);
+	int64_t dest_ext = sign_ext_64(dest & (0xFFFFFFFF >> (32 - data_size)), data_size);
 	int64_t res;
 	
 	src_ext = src_ext & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size));
@@ -219,7 +233,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	    res = (int64_t)sign_ext(res & (0xFFFFFFFFFFFFFFFF >> (64 - 2 * data_size)), 2 * data_size);   
 	}
 	
-    if(data_size == 32) printf("in imul: data_size: %d, res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", data_size, res, src_ext, dest_ext, __ref_alu_imul(src, dest, data_size));
+    //if(data_size == 32) printf("in imul: data_size: %d, res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", data_size, res, src_ext, dest_ext, __ref_alu_imul(src, dest, data_size));
     return res;
 #endif
 }
