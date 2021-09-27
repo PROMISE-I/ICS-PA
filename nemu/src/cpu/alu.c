@@ -215,7 +215,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 	
 	int64_t res = (int64_t)sign_ext((dest_ext * src_ext) & (0xFFFFFFFFFFFFFFFF >> (64 -  data_size)), data_size);
 	
-    //printf("in imul: data_size: %d, res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", data_size, res, src_ext, dest_ext, __ref_alu_imul(src, dest, data_size));
+    printf("in imul: data_size: %d, res: %llx, src_64: %llx, dest_64: %llx, std_res: %llx\n", data_size, res, src_ext, dest_ext, __ref_alu_imul(src, dest, data_size));
     return res;
 #endif
 }
