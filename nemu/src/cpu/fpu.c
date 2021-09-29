@@ -92,7 +92,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		}
 	}
 
-    printf("sign: %x, exponent: %x, fraction: %x\n", sign, exponent, fraction);
+    printf("sign: %x, exponent: %x, fraction: %x\n", sign, exp, sig_grs);
 	FLOAT f;
 	f.sign = sign;
 	f.exponent = (uint32_t)(exp & 0xff);
