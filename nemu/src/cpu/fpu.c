@@ -168,7 +168,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	uint32_t shift = 0;
 
 	/* TODO: shift = ? */
-	if(fa.exponent == 0) shift = fb.exponent - 1;
+	if(fa.exponent == 0 && fb.exponent != 0) shift = fb.exponent - 1;
 	else shift = fb.exponent - fa.exponent;
 	assert(shift >= 0);
 
