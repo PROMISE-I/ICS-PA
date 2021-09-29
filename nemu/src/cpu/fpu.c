@@ -61,7 +61,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		{
 			/* TODO: shift left */
 			sig_grs = sig_grs << 1;
-			exp++;
+			exp--;
 		}
 		if (exp == 0)
 		{
@@ -140,6 +140,9 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	FLOAT f, fa, fb;
 	fa.val = a;
 	fb.val = b;
+	
+	FLOAT stan;
+	stan.fval = fa.fval + fb.fval;
 	// infity, NaN
 	if (fa.exponent == 0xff)
 	{
@@ -208,7 +211,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 
 	uint32_t exp_res = fb.exponent;
 	
-	printf("a.val: %x, b.val: %x, val_before_normalize: %x\n", fa.val, fb.val, f.val);
+	printf("a.val: %x, b.val: %x, val_before_normalize: %x, gold: %x\n", fa.val, fb.val, f.val, stan.val);
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
