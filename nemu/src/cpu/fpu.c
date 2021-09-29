@@ -200,7 +200,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 
 	uint32_t exp_res = fb.exponent;
 	
-	printf("standard_val: %x, val_before_normalize: %x, ", fa.fval + fb.fval, f.val);
+	printf("standard_val: %f, val_before_normalize: %x, ", fa.fval + fb.fval, f.val);
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
