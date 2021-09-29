@@ -14,6 +14,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 
 	if ((sig_grs >> (23 + 3)) > 1 || exp < 0)
 	{
+	    printf("case1\n");
 		// normalize toward right
 		while ((((sig_grs >> (23 + 3)) > 1) && exp < 0xff) // condition 1
 			   ||										   // or
@@ -52,6 +53,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	}
 	else if (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 	{
+	    printf("case2");
 		// normalize toward left
 		while (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 		{
@@ -69,6 +71,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	}
 	else if (exp == 0 && sig_grs >> (23 + 3) == 1)
 	{
+	    printf("case3");
 		// two denormals result in a normal
 		exp++;
 	}
@@ -200,7 +203,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 
 	uint32_t exp_res = fb.exponent;
 	
-	printf("a: %x, b: %x, val_before_normalize: %x, ", fa.val, fb.val, f.val);
+	printf("a: %x, b: %x, val_before_normalize: %x\n", fa.val, fb.val, f.val);
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
