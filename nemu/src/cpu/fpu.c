@@ -81,11 +81,13 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		/* TODO: round up and remove the GRS bits */
 		if(((sig_grs & 7) > 4 )  ||  (((sig_grs & 7) == 4) && (((sig_grs >> 3) & 1) == 1)))
 		{
+		    printf("round_case1\n");
 		    sig_grs += 8;
 		    sig_grs = sig_grs & 0xFFFFFFFFFFFFFFF8;
 		    return internal_normalize(sign, exp, sig_grs);
 		}
 		else{
+		    printf("round_case2\n");
 		    sig_grs = sig_grs >> 3;   
 		}
 	}
