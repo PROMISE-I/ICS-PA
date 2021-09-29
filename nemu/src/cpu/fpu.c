@@ -27,7 +27,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			/* TODO: shift right, pay attention to sticky bit*/
 			uint32_t sticky = sig_grs & 1;
 			sig_grs = (sig_grs >> 1) | sticky;
-			exp--;
+			exp++;
 		}
 
 		if (exp >= 0xff)
