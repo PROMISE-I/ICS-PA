@@ -14,7 +14,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 
 	if ((sig_grs >> (23 + 3)) > 1 || exp < 0)
 	{
-	    printf("case1\n");
+	    //printf("case1\n");
 		// normalize toward right
 		while ((((sig_grs >> (23 + 3)) > 1) && exp < 0xff) // condition 1
 			   ||										   // or
@@ -53,7 +53,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	}
 	else if (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 	{
-	    printf("case2");
+	    //printf("case2\n");
 		// normalize toward left
 		while (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 		{
@@ -71,7 +71,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	}
 	else if (exp == 0 && sig_grs >> (23 + 3) == 1)
 	{
-	    printf("case3");
+	    //printf("case3\n");
 		// two denormals result in a normal
 		exp++;
 	}
@@ -81,17 +81,18 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		/* TODO: round up and remove the GRS bits */
 		if(((sig_grs & 7) > 4 )  ||  (((sig_grs & 7) == 4) && (((sig_grs >> 3) & 1) == 1)))
 		{
-		    printf("round_case1\n");
+		    //printf("round_case1\n");
 		    sig_grs += 8;
 		    sig_grs = sig_grs & 0xFFFFFFFFFFFFFFF8;
 		    return internal_normalize(sign, exp, sig_grs);
 		}
 		else{
-		    printf("round_case2\n");
+		    //printf("round_case2\n");
 		    sig_grs = sig_grs >> 3;   
 		}
 	}
 
+    printf("sign: %x, exponent: %x, fraction: %x\n", sign, exponent, fraction);
 	FLOAT f;
 	f.sign = sign;
 	f.exponent = (uint32_t)(exp & 0xff);
@@ -205,7 +206,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 
 	uint32_t exp_res = fb.exponent;
 	
-	printf("a: %x, b: %x, val_before_normalize: %x\n", fa.val, fb.val, f.val);
+	printf("a.val: %x, b.val: %x, val_before_normalize: %x\n", fa.val, fb.val, f.val);
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
