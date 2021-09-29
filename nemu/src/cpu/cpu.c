@@ -8,7 +8,7 @@
 #include <assert.h>
 
 CPU_STATE cpu;
-extren FPU fpu;
+extern FPU fpu;
 int nemu_state;
 uint8_t data_size = 32;
 bool verbose = false;
