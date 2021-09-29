@@ -12,7 +12,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	// normalization
 	bool overflow = false; // true if the result is INFINITY or 0 during normalize
 
-    printf("sign_in: %x, exponent_in: %x, fraction_in: %llx\n", sign, exp, sig_grs);
+    //printf("sign_in: %x, exponent_in: %x, fraction_in: %llx\n", sign, exp, sig_grs);
 
 	if ((sig_grs >> (23 + 3)) > 1 || exp < 0)
 	{
@@ -94,12 +94,12 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		}
 	}
 
-    printf("sign: %x, exponent: %x, fraction: %llx\n", sign, exp, sig_grs);
+    //printf("sign_out: %x, exponent_out: %x, fraction_out: %llx\n", sign, exp, sig_grs);
 	FLOAT f;
 	f.sign = sign;
 	f.exponent = (uint32_t)(exp & 0xff);
 	f.fraction = sig_grs; // here only the lowest 23 bits are kept
-	printf("res: %x\n", f.val);
+	//printf("res: %x\n", f.val);
 	return f.val;
 }
 
@@ -141,8 +141,9 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 	fa.val = a;
 	fb.val = b;
 	
-	FLOAT stan;
-	stan.fval = fa.fval + fb.fval;
+	//FLOAT stan;
+	//stan.fval = fa.fval + fb.fval;
+	
 	// infity, NaN
 	if (fa.exponent == 0xff)
 	{
@@ -211,7 +212,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 
 	uint32_t exp_res = fb.exponent;
 	
-	printf("a.val: %x, b.val: %x, val_before_normalize: %x, gold: %x\n", fa.val, fb.val, f.val, stan.val);
+	//printf("a.val: %x, b.val: %x, val_before_normalize: %x, gold: %x\n", fa.val, fb.val, f.val, stan.val);
 	return internal_normalize(f.sign, exp_res, sig_res);
 }
 
