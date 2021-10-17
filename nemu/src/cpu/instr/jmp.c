@@ -32,7 +32,7 @@ make_instr_func(je_short){
         operand_read(&imm);
         len += imm.val;
     }
-    printf("ZF: %x", cpu.eflags.ZF);
+    printf("ZF: %x\n", cpu.eflags.ZF);
     
     return len;
 }
