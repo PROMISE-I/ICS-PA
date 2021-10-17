@@ -108,7 +108,7 @@ make_instr_func(jbe_short){
     imm.type = OPR_IMM;
     imm.addr = eip + 1;
     len += 1;
-    if((cpu.eflags.CF | cpu.eflags.ZF) == 0){
+    if((cpu.eflags.CF | cpu.eflags.ZF) == 1){
         operand_read(&imm);
         len += imm.val;
     }
