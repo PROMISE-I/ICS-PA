@@ -9,7 +9,7 @@ make_instr_func(call_near){
     imm.data_size = data_size;
     imm.addr = eip + 1;
 
-    cpu.esp += 4;
+    cpu.esp -= 4;
     m.type = OPR_MEM;
     m.data_size = 32;
     m.addr = cpu.esp;
