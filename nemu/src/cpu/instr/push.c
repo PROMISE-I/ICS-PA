@@ -10,7 +10,7 @@ make_instr_func(push_ebp){
     m.addr = cpu.esp;
     m.val = cpu.ebp;
     
-    operand_write(m);
+    operand_write(&m);
     cpu.esp += 4;
     
     return 1;
