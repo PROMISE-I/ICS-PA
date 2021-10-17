@@ -110,7 +110,7 @@ make_instr_func(jbe_short){
     len += 1;
     if((cpu.eflags.CF | cpu.eflags.ZF) == 1){
         operand_read(&imm);
-        len += imm.val;
+        len += sign_ext(imm.val, 8);
     }
     
     return len;
