@@ -16,7 +16,7 @@ make_instr_func(sub_i2rm_bv){
     
     operand_read(&rm);
     operand_read(&imm);
-    rm.val = alu.sub(sign_ext(imm.val, 8), rm.val, data_size);
+    rm.val = alu_sub(sign_ext(imm.val, 8), rm.val, data_size);
     operand_write(&rm);
     
     return len;
