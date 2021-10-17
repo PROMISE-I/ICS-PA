@@ -18,5 +18,5 @@ make_instr_func(add_i2rm_v){
     rm.val += imm.val;
     operand_write(&rm);
     
-    return len + data_size/8s;
+    return len + data_size/8;
 }
