@@ -3,5 +3,6 @@
 /*
 Put the declarations of `push' instructions here.
 */
+make_instr_func(push_ebp);
 
 #endif
