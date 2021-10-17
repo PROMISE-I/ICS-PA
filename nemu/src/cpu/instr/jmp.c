@@ -19,7 +19,8 @@ make_instr_func(jmp_near)
     return 1 + data_size / 8;
 }
 
-make_instr_func(je_short){
+make_instr_func(je_short)
+{
     OPERAND imm;
 
     int len = 1;
@@ -36,7 +37,8 @@ make_instr_func(je_short){
     return len;
 }
 
-make_instr_func(jg_short){
+make_instr_func(jg_short)
+{
     OPERAND imm;
     
     int len = 1;
@@ -52,7 +54,8 @@ make_instr_func(jg_short){
     return len;
 }
 
-make_instr_func(jle_short){
+make_instr_func(jle_short)
+{
     OPERAND imm;
     
     int len = 1;
@@ -68,7 +71,8 @@ make_instr_func(jle_short){
     return len;
 }
 
-make_instr_func(jne_short){
+make_instr_func(jne_short)
+{
     OPERAND imm;
     
     int len = 1;
@@ -84,7 +88,8 @@ make_instr_func(jne_short){
     return len;
 }
 
-make_instr_func(jnp_short){
+make_instr_func(jnp_short)
+{
     OPERAND imm;
     
     int len = 1;
@@ -100,7 +105,8 @@ make_instr_func(jnp_short){
     return len;
 }
 
-make_instr_func(jbe_short){
+make_instr_func(jbe_short)
+{
     OPERAND imm;
     
     int len = 1;
