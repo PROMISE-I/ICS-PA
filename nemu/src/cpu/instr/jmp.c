@@ -46,7 +46,7 @@ make_instr_func(jg_short){
     len += 1;
     if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 0){
         operand_read(&imm);
-        len += imm.val;
+        len += sign_ext(imm.val, 8);
     }
     
     return len;
@@ -62,7 +62,7 @@ make_instr_func(jle_short){
     len += 1;
     if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 1){
         operand_read(&imm);
-        len += imm.val;
+        len += sign_ext(imm.val, 8);
     }
     
     return len;
@@ -78,7 +78,7 @@ make_instr_func(jne_short){
     len += 1;
     if(cpu.eflags.ZF == 0){
         operand_read(&imm);
-        len += imm.val;
+        len += sign_ext(imm.val, 8);
     }
     
     return len;
@@ -94,7 +94,7 @@ make_instr_func(jnp_short){
     len += 1;
     if(cpu.eflags.PF == 0){
         operand_read(&imm);
-        len += imm.val;
+        len += sign_ext(imm.val, 8);
     }
     
     return len;
