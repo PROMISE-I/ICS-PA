@@ -23,10 +23,10 @@ make_instr_func(je_short){
     OPERAND imm;
 
     int len = 1;
-    imm.data_size = 16;
+    imm.data_size = 8;
     imm.type = OPR_IMM;
     imm.addr = eip + 1;
-    len += 2;
+    len += 1;
     
     if(cpu.eflags.ZF == 0){
         operand_read(&imm);
