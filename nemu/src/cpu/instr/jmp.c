@@ -28,7 +28,7 @@ make_instr_func(je_short){
     imm.addr = eip + 1;
     len += 2;
     
-    if(cpu.ZF == 0){
+    if(cpu.eflags.ZF == 0){
         operand_read(&imm);
         len += imm.val;
     }
