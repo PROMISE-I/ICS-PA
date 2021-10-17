@@ -29,9 +29,9 @@ void init_cpu(const uint32_t init_eip)
 		fpu.regStack[i].val = 0x0;
 	}
 	cpu.eip = init_eip;
-	cpu.esp = (128 << 20) - 16;
+	cpu.esp = (128 << 20) - 16; 
 #ifdef IA32_SEG
-	cpu.cr0.val = 0x0;
+	cpu.cr0.val = 0x0; 
 	cpu.gdtr.base = cpu.gdtr.limit = 0x0;
 	for (i = 0; i < 6; i++)
 	{
