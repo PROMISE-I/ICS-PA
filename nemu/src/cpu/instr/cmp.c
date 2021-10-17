@@ -21,3 +21,18 @@ make_instr_func(cmp_i2rm_bv){
     
     return len + 1;
 }
+
+make_instr_func(cmp_r2rm_v){
+    OPERAND r, rm;
+
+    int len = 1;
+    r.data_size = data_size;
+    rm.data_size = data_size;
+    len += modrm_rm(eip+1, &r, &rm);
+    
+    operand_read(&r);
+    operand_read(&rm);
+    alu_sub(r.val ,rm.val, data_size);
+    
+    return len;
+}
