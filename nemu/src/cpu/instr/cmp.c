@@ -28,7 +28,7 @@ make_instr_func(cmp_r2rm_v){
     int len = 1;
     r.data_size = data_size;
     rm.data_size = data_size;
-    len += modrm_rm(eip+1, &r, &rm);
+    len += modrm_r_rm(eip+1, &r, &rm);
     
     operand_read(&r);
     operand_read(&rm);
