@@ -2,7 +2,8 @@
 /*
 Put the implementations of `and' instructions here.
 */
-make_instr_func(and_i2rm_bv){
+make_instr_func(and_i2rm_bv)
+{
     OPERAND imm, rm;
     
     int len = 1;
