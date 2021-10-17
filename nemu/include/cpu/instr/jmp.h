@@ -3,4 +3,5 @@
 
 make_instr_func(jmp_near);
 make_instr_func(je_short);
+make_instr_func(jg_short);
 #endif

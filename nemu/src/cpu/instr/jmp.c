@@ -35,3 +35,20 @@ make_instr_func(je_short){
     
     return len;
 }
+
+make_instr_func(jg_short){
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 0){
+        operand_read(&imm);
+        len += imm.val;
+    }
+    
+    return len;
+    
+}
