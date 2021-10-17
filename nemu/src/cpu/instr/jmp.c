@@ -83,3 +83,19 @@ make_instr_func(jne_short){
     
     return len;
 }
+
+make_instr_func(jnp_short){
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(cpu.eflags.PF == 0){
+        operand_read(&imm);
+        len += imm.val;
+    }
+    
+    return len;
+}

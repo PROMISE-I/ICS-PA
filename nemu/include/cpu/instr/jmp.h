@@ -6,4 +6,5 @@ make_instr_func(je_short);
 make_instr_func(jg_short);
 make_instr_func(jle_short);
 make_instr_func(jne_short);
+make_instr_func(jnp_short);
 #endif
