@@ -10,7 +10,7 @@ make_instr_func(call_near){
     imm.addr = eip + 1;
 
     operand_read(&imm);
-    cpu.eip = imm;
+    cpu.eip = imm.val;
     
     return 0;
 }
