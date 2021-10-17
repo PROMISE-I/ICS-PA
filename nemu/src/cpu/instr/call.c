@@ -5,9 +5,10 @@ Put the implementations of `call' instructions here.
 make_instr_func(call_near){
     OPERAND imm,m;
     
+    int len = 1;
     imm.type = OPR_IMM;
     imm.data_size = data_size;
-    imm.addr = eip + 1;
+    imm.addr = eip + len;
 
     cpu.esp -= 4;
     m.type = OPR_MEM;
@@ -18,8 +19,6 @@ make_instr_func(call_near){
     operand_write(&m);
     operand_read(&imm);
     
-    cpu.eip = imm.val;
-    
-    return 0;
+    return len + data_size/8 + imm.val;
 }
 
