@@ -28,11 +28,10 @@ make_instr_func(je_short){
     imm.addr = eip + 1;
     len += 1;
     
-    if(cpu.eflags.ZF == 0){
+    if(cpu.eflags.ZF == 1){
         operand_read(&imm);
         len += imm.val;
     }
-    printf("ZF: %x\n", cpu.eflags.ZF);
     
     return len;
 }
