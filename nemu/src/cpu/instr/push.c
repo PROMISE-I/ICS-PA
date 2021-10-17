@@ -31,3 +31,18 @@ make_instr_func(push_ebx){
     
     return 1;
 }
+
+make_instr_func(push_edi){
+    OPERAND m;
+    
+    cpu.esp += 4;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.addr = cpu.esp;
+    m.val = cpu.edi;
+    
+    operand_write(&m);
+    
+    return 1;
+}
