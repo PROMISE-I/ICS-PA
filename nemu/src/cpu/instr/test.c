@@ -12,6 +12,6 @@ make_instr_func(test_r2rm_v){
     
     alu_and(r.val, rm.val, data_size);
 
-    printf("ZF: %x\n", cpu.eflags.ZF);
+    printf("ZF: %x, r.val: %x, rm.val: %x\n", cpu.eflags.ZF, r.val, rm.val);
     return len;
 }
