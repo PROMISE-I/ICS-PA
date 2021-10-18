@@ -2,7 +2,7 @@
 /*
 Put the implementations of `or' instructions here.
 */
-make_instr_func(xor_r2rm_b){
+make_instr_func(or_r2rm_b){
     OPERAND r, rm;
     
     int len = 1;
@@ -18,7 +18,7 @@ make_instr_func(xor_r2rm_b){
     return len;
 }
 
-make_instr_func(xor_r2rm_v){
+make_instr_func(or_r2rm_v){
     OPERAND r, rm;
     
     int len = 1;
@@ -34,7 +34,7 @@ make_instr_func(xor_r2rm_v){
     return len;
 }
 
-make_instr_func(xor_rm2r_b){
+make_instr_func(or_rm2r_b){
     OPERAND r, rm;
     
     int len = 1;
@@ -50,7 +50,7 @@ make_instr_func(xor_rm2r_b){
     return len;
 }
 
-make_instr_func(xor_rm2r_v){
+make_instr_func(or_rm2r_v){
     OPERAND r, rm;
     
     int len = 1;
