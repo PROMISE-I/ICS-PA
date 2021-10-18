@@ -2,6 +2,38 @@
 /*
 Put the implementations of `add' instructions here.
 */
+make_instr_func(add_r2rm_b){
+    OPERAND r, rm;
+    
+    int len = 1;
+    rm.data_size = 8; 
+    r.data_size = 8;
+    len += modrm_r_rm(eip+1, &r, &rm);
+    
+    operand_read(&rm);
+    operand_read(&r);
+    rm.val += r.val;
+    operand_write(&rm);
+    
+    return len;
+}
+
+make_instr_func(add_r2rm_v){
+    OPERAND r, rm;
+    
+    int len = 1;
+    rm.data_size = data_size; 
+    r.data_size = data_size;
+    len += modrm_r_rm(eip+1, &r, &rm);
+    
+    operand_read(&rm);
+    operand_read(&r);
+    rm.val += r.val;
+    operand_write(&rm);
+    
+    return len;
+}
+
 make_instr_func(add_i2rm_v){
     OPERAND imm, rm;
     
