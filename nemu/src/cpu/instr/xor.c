@@ -13,7 +13,7 @@ make_instr_func(xor_r2rm_b){
     operand_read(&r);
     operand_read(&rm);
     rm.val = alu_xor(r.val, rm.val, 8);
-    oeprand_write(&rm);
+    operand_write(&rm);
     
     return len;
 }
@@ -29,7 +29,7 @@ make_instr_func(xor_r2rm_v){
     operand_read(&r);
     operand_read(&rm);
     rm.val = alu_xor(r.val, rm.val, data_size);
-    oeprand_write(&rm);
+    operand_write(&rm);
     
     return len;
 }
@@ -45,7 +45,7 @@ make_instr_func(xor_rm2r_b){
     operand_read(&r);
     operand_read(&rm);
     r.val = alu_xor(r.val, rm.val, 8);
-    oeprand_write(&r);
+    operand_write(&r);
     
     return len;
 }
@@ -61,7 +61,7 @@ make_instr_func(xor_rm2r_v){
     operand_read(&r);
     operand_read(&rm);
     r.val = alu_xor(r.val, rm.val, data_size);
-    oeprand_write(&r);
+    operand_write(&r);
     
     return len;
 }
