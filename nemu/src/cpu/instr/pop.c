@@ -11,7 +11,7 @@ make_instr_func(pop_ebx){
     
     operand_read(&m);
     cpu.ebx = m.val;
-    esp += 4;
+    cpu.esp += 4;
     
     return 1;
 }
@@ -25,7 +25,7 @@ make_instr_func(pop_ebp){
     
     operand_read(&m);
     cpu.ebp = m.val;
-    esp += 4;
+    cpu.esp += 4;
     
     return 1;
 }
