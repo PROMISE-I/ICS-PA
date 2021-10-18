@@ -121,3 +121,21 @@ make_instr_func(jbe_short)
     
     return len;
 }
+
+make_instr_func(jbe_v){
+    OPERAND imm;
+    
+    int len = 1;
+
+    imm.type = OPR_IMM;
+    imm.data_size = data_size;
+    imm.addr = eip + 1;
+    operand_read(&imm);
+    len++;
+    
+    if((cpu.eflags.CF | cpu.eflags.ZF) == 1){
+        len += sign_ext(imm.val, data_size);
+    }
+    
+    return len;
+}
