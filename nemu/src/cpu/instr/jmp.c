@@ -131,7 +131,7 @@ make_instr_func(jbe_v){
     imm.data_size = data_size;
     imm.addr = eip + 1;
     operand_read(&imm);
-    len++;
+    len += data_size / 8;
     
     if((cpu.eflags.CF | cpu.eflags.ZF) == 1){
         len += sign_ext(imm.val, data_size);
