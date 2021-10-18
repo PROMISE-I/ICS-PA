@@ -30,7 +30,7 @@ make_instr_func(add_i2a_v){
     imm.addr = eip + 1;
     
     operand_read(&imm);
-    cpu.eax = alu_add(cpu.eax, sign_ext(imm.val, data_size));
+    cpu.eax = alu_add(cpu.eax, sign_ext(imm.val, data_size), 32);
     
     return len + data_size/8;
 }
