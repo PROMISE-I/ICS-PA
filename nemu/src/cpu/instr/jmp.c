@@ -525,7 +525,7 @@ make_instr_func(jl_v)
     return len;
 }
 
-make_instr_func(jnl_short)
+make_instr_func(jnl_v)
 {
     OPERAND imm;
     
