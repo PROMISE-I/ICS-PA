@@ -19,7 +19,79 @@ make_instr_func(jmp_near)
     return 1 + data_size / 8;
 }
 
-make_instr_func(je_short)
+make_instr_func(jo_short)
+{
+    OPERAND imm;
+
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    
+    if(cpu.eflags.OF == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jno_short)
+{
+    OPERAND imm;
+
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    
+    if(cpu.eflags.OF == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jb_short)
+{
+    OPERAND imm;
+
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    
+    if(cpu.eflags.CF == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jnb_short)
+{
+    OPERAND imm;
+
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    
+    if(cpu.eflags.CF == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jz_short)
 {
     OPERAND imm;
 
@@ -31,47 +103,13 @@ make_instr_func(je_short)
     
     if(cpu.eflags.ZF == 1){
         operand_read(&imm);
-        len += imm.val;
-    }
-    
-    return len;
-}
-
-make_instr_func(jg_short)
-{
-    OPERAND imm;
-    
-    int len = 1;
-    imm.data_size = 8;
-    imm.type = OPR_IMM;
-    imm.addr = eip + 1;
-    len += 1;
-    if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 0){
-        operand_read(&imm);
         len += sign_ext(imm.val, 8);
     }
     
     return len;
 }
 
-make_instr_func(jle_short)
-{
-    OPERAND imm;
-    
-    int len = 1;
-    imm.data_size = 8;
-    imm.type = OPR_IMM;
-    imm.addr = eip + 1;
-    len += 1;
-    if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 1){
-        operand_read(&imm);
-        len += sign_ext(imm.val, 8);
-    }
-    
-    return len;
-}
-
-make_instr_func(jne_short)
+make_instr_func(jnz_short)
 {
     OPERAND imm;
     
@@ -81,23 +119,6 @@ make_instr_func(jne_short)
     imm.addr = eip + 1;
     len += 1;
     if(cpu.eflags.ZF == 0){
-        operand_read(&imm);
-        len += sign_ext(imm.val, 8);
-    }
-    
-    return len;
-}
-
-make_instr_func(jnp_short)
-{
-    OPERAND imm;
-    
-    int len = 1;
-    imm.data_size = 8;
-    imm.type = OPR_IMM;
-    imm.addr = eip + 1;
-    len += 1;
-    if(cpu.eflags.PF == 0){
         operand_read(&imm);
         len += sign_ext(imm.val, 8);
     }
@@ -122,7 +143,161 @@ make_instr_func(jbe_short)
     return len;
 }
 
-make_instr_func(jbe_v){
+make_instr_func(jnbe_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if((cpu.eflags.CF | cpu.eflags.ZF) == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(js_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(cpu.eflags.SF == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jns_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(cpu.eflags.SF == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jp_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(cpu.eflags.PF == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jnp_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(cpu.eflags.PF == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jl_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if((cpu.eflags.SF ^ cpu.eflags.OF) == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jnl_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if((cpu.eflags.SF ^ cpu.eflags.OF) == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;  
+}
+
+make_instr_func(jle_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 1){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jnle_short)
+{
+    OPERAND imm;
+    
+    int len = 1;
+    imm.data_size = 8;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    len += 1;
+    if(((cpu.eflags.SF ^ cpu.eflags.OF) | cpu.eflags.ZF) == 0){
+        operand_read(&imm);
+        len += sign_ext(imm.val, 8);
+    }
+    
+    return len;
+}
+
+make_instr_func(jbe_v)
+{
     OPERAND imm;
     
     int len = 1;
