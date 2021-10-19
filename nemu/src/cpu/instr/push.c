@@ -123,6 +123,27 @@ make_instr_func(push_edi){
     return 1;
 }
 
+make_instr_func(push_i_b){
+    OPERAND imm, m;
+    
+    int len = 1;
+    imm.type = OPR_IMM;
+    imm.addr = eip + 1;
+    imm.data_size = 8;
+    len++;
+    
+    cpu.esp -= 4;
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.addr = cpu.esp;
+    
+    operand_read(&imm);
+    m.val = sign_ext(imm.val, 8);
+    operand_write(&m);
+    
+    return len;
+}
+
 make_instr_func(push_rm_v){
     OPERAND rm, m;
     
