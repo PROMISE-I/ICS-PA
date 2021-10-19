@@ -59,6 +59,21 @@ make_instr_func(cmp_i2rm_bv){
     return len + 1;
 }
 
+make_instr_func(cmp_r2rm_b){
+    OPERAND r, rm;
+
+    int len = 1;
+    r.data_size = 8;
+    rm.data_size = 8;
+    len += modrm_r_rm(eip+1, &r, &rm);
+    
+    operand_read(&r);
+    operand_read(&rm);
+    alu_sub(r.val ,rm.val, 8);
+    
+    return len;
+}
+
 make_instr_func(cmp_r2rm_v){
     OPERAND r, rm;
 
@@ -70,6 +85,36 @@ make_instr_func(cmp_r2rm_v){
     operand_read(&r);
     operand_read(&rm);
     alu_sub(r.val ,rm.val, data_size);
+    
+    return len;
+}
+
+make_instr_func(cmp_rm2r_b){
+    OPERAND rm, r;
+    
+    int len = 1;
+    rm.data_size = 8;
+    r.data_size = 8;
+    len += modrm_r_rm(eip+1, &r, &rm);
+    
+    operand_read(&rm);
+    operand_read(&r);
+    alu_sub(rm.val, r.val, 8);
+    
+    return len;
+}
+
+make_instr_func(cmp_rm2r_v){
+    OPERAND rm, r;
+    
+    int len = 1;
+    rm.data_size = data_size;
+    r.data_size = data_size;
+    len += modrm_r_rm(eip+1, &r, &rm);
+    
+    operand_read(&rm);
+    operand_read(&r);
+    alu_sub(rm.val, r.val, data_size);
     
     return len;
 }
