@@ -11,4 +11,6 @@ make_instr_func(dec_esp);
 make_instr_func(dec_ebp);
 make_instr_func(dec_esi);
 make_instr_func(dec_edi);
+make_instr_func(dec_rm_b);
+make_instr_func(dec_rm_v);
 #endif

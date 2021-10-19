@@ -2,6 +2,20 @@
 /*
 Put the implementations of `inc' instructions here.
 */
+make_instr_func(inc_rm_b){
+    OPERAND rm;
+    
+    int len = 1;
+    rm.data_size = 8;
+    len += modrm_rm(eip+1, &rm);
+    
+    operand_read(&rm);
+    rm.val = alu_add(1, rm.val, 8);
+    operand_write(&rm);
+    
+    return len;
+}
+
 make_instr_func(inc_rm_v){
     OPERAND rm;
     
@@ -10,7 +24,7 @@ make_instr_func(inc_rm_v){
     len += modrm_rm(eip+1, &rm);
     
     operand_read(&rm);
-    rm.val++;
+    rm.val = alu_add(1, rm.val, data_size);
     operand_write(&rm);
     
     return len;

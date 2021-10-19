@@ -41,3 +41,31 @@ make_instr_func(dec_edi){
     cpu.edi = alu_sub(1, cpu.edi, 32);
     return 1;
 }
+
+make_instr_func(dec_rm_b){
+    OPERAND rm;
+    
+    int len = 1;
+    rm.data_size = 8;
+    len += modrm_rm(eip+1, &rm);
+    
+    operand_read(&rm);
+    rm.val = alu_sub(1, rm.val, 8);
+    operand_write(&rm);
+    
+    return len;
+}
+
+make_instr_func(dec_rm_v){
+    OPERAND rm;
+    
+    int len = 1;
+    rm.data_size = data_size;
+    len += modrm_rm(eip+1, &rm);
+    
+    operand_read(&rm);
+    rm.val = alu_sub(1, rm.val, data_size);
+    operand_write(&rm);
+    
+    return len;
+}
