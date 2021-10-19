@@ -3,12 +3,6 @@
 include Makefile.git
 
 Submit_Script = scripts/submit
-
-mymax:
-	cd ./testcase
-	make
-	cd ..
-	./nemu/nemu --testcase myMax
 	
 quick:
 	./scripts/objdump4nemu-i386 -d  ./testcase/bin/quick-sort
