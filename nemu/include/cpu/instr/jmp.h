@@ -2,6 +2,7 @@
 #define __INSTR_JMP_H__
 
 make_instr_func(jmp_near);
+make_instr_func(jmp_b);
 make_instr_func(jo_short);
 make_instr_func(jno_short);
 make_instr_func(jb_short);
