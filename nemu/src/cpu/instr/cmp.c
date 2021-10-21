@@ -12,7 +12,7 @@ make_instr_func(cmp_i2al_b){
     len++;
     
     operand_read(&imm);
-    alu_sub(imm.val, cpu.gpr[0]._8[1], 8);
+    alu_sub(imm.val, cpu.eax, 8);
     
     return len;
 }
