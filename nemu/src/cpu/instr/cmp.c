@@ -2,6 +2,36 @@
 /*
 Put the implementations of `cmp' instructions here.
 */
+make_instr_func(cmp_i2al_b){
+    OPERAND imm;
+    
+    int len = 1;
+    imm.type = OPR_IMM;
+    imm.data_size = 8;
+    imm.addr = eip + 1;
+    len++;
+    
+    operand_read(&imm);
+    alu_sub(imm.val, cpu.gpr[0]._8[1], 8);
+    
+    return len;
+}
+
+make_instr_func(cmp_i2eax_v){
+    OPERAND imm;
+    
+    int len = 1;
+    imm.type = OPR_IMM;
+    imm.data_size = data_size;
+    imm.addr = eip + 1;
+    len =+ data_size/8;
+    
+    operand_read(&imm);
+    alu_sub(imm.val, cpu.eax, data_size);
+    
+    return len;
+}
+
 make_instr_func(cmp_i2rm_b){
     OPERAND imm, rm;
     
