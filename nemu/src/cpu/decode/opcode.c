@@ -105,11 +105,11 @@ instr_func group_2_cv_entry[8] =
 
 /* 0xf6 */
 instr_func group_3_b_entry[8] =
-    {inv, inv, inv, inv, inv, inv, inv, inv};
+    {inv, inv, not_rm_b, inv, inv, inv, inv, inv};
 
 /* 0xf7 */
 instr_func group_3_v_entry[8] =
-    {inv, inv, inv, inv, inv, inv, inv, inv};
+    {inv, inv, not_rm_v, inv, inv, inv, inv, inv};
 
 /* 0xff */
 instr_func group_5_indirect_entry[8] =
