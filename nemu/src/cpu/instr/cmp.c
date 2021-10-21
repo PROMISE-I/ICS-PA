@@ -44,9 +44,8 @@ make_instr_func(cmp_i2rm_b){
     imm.data_size = 8;
     
     operand_read(&imm);
-    imm.val = sign_ext(imm.val, data_size);
     operand_read(&rm);
-    alu_sub(imm.val, rm.val, data_size);
+    alu_sub(imm.val, rm.val, 8);
     
     return len + 1;
 }
@@ -63,7 +62,6 @@ make_instr_func(cmp_i2rm_v){
     imm.data_size = data_size;
     
     operand_read(&imm);
-    imm.val = sign_ext(imm.val, data_size);
     operand_read(&rm);
     alu_sub(imm.val, rm.val, data_size);
     
@@ -82,7 +80,7 @@ make_instr_func(cmp_i2rm_bv){
     imm.data_size = 8;
     
     operand_read(&imm);
-    imm.val = sign_ext(imm.val, data_size);
+    imm.val = sign_ext(imm.val, 8);
     operand_read(&rm);
     alu_sub(imm.val, rm.val, data_size);
     
