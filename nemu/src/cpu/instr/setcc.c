@@ -12,6 +12,7 @@ static void instr_execute_1op_cc_fail()
 	operand_write(&opr_src);
 }
 
+make_instr_impl_1op_cc(set, rm, b, b);
 make_instr_impl_1op_cc(set, rm, b, ne)
 make_instr_impl_1op_cc(set, rm, b, a)
 make_instr_impl_1op_cc(set, rm, b, ae)
