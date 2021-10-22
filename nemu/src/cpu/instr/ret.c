@@ -27,7 +27,7 @@ make_instr_func(ret_near_w){
     imm.data_size = 16;
     imm.addr = eip + 1;
     
-    operand_read(&m)
+    operand_read(&m);
     operand_read(&imm);
     cpu.eip = m.val;
     cpu.esp += 4;
