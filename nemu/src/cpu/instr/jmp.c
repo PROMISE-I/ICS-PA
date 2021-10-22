@@ -19,6 +19,18 @@ make_instr_func(jmp_near)
     return 1 + data_size / 8;
 }
 
+make_instr_func(jmp_rm_v)
+{
+    OPERAND rm;
+    
+    rm.data_size = data_size;
+    mod_rm(eip+1, &rm);
+    
+    operand_read(&rm);
+    
+    return rm.val;
+}
+
 make_instr_func(jmp_b)
 {
     OPERAND imm;
