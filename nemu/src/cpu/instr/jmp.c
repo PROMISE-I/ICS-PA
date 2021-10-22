@@ -24,7 +24,7 @@ make_instr_func(jmp_rm_v)
     OPERAND rm;
     
     rm.data_size = data_size;
-    mod_rm(eip+1, &rm);
+    modrm_rm(eip+1, &rm);
     
     operand_read(&rm);
     
