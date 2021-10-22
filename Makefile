@@ -3,12 +3,7 @@
 include Makefile.git
 
 Submit_Script = scripts/submit
-	
-quick:
-	./scripts/objdump4nemu-i386 -d  ./testcase/bin/quick-sort
 
-obj:
-	./scripts/objdump4nemu-i386 -d  ./testcase/bin/if-else
 
 nemu: 
 	$(call git_commit, "compile nemu testcase kernel", $(TIME_MAKE))
