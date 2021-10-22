@@ -14,6 +14,8 @@ make_instr_impl_2op(and, r, rm, b);
 make_instr_impl_2op(and, r, rm, v);
 make_instr_impl_2op(and, rm, r, b);
 make_instr_impl_2op(and, rm, r, v);
+make_instr_impl_2op(and, i, rm, b);
+make_instr_impl_2op(and, i, rm, v);
 
 make_instr_func(and_i2rm_bv)
 {
