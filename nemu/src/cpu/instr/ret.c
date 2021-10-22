@@ -15,3 +15,23 @@ make_instr_func(ret_near){
     
     return 0;
 }
+
+make_instr_func(ret_near_w){
+    OPERAND m, imm;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.addr = cpu.esp;
+    
+    imm.type = OPR_IMM;
+    imm.data_size = 16;
+    imm.addr = eip + 1;
+    
+    operand_read(&m)
+    operand_read(&imm);
+    cpu.eip = m.val;
+    cpu.esp += 4;
+    cpu.esp += imm.val;
+    
+    return 0;
+}
