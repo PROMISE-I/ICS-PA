@@ -27,8 +27,9 @@ make_instr_func(jmp_rm_v)
     modrm_rm(eip+1, &rm);
     
     operand_read(&rm);
+    cpu.eip = rm.val;
     
-    return rm.val;
+    return 0;
 }
 
 make_instr_func(jmp_b)
