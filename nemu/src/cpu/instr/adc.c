@@ -15,5 +15,7 @@ make_instr_func(adc_r2rm_v){
     rm.val = alu_adc(r.val, rm.val, data_size);
     operand_write(&rm);
     
+    print_asm_2("adc", "v", len, &r, &rm);
+    
     return len;
 }
