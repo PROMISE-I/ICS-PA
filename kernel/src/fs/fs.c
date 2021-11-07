@@ -50,6 +50,7 @@ size_t fs_read(int fd, void *buf, size_t len)
 
 size_t fs_write(int fd, void *buf, size_t len)
 {
+    BREAK_POINT;
 	assert(fd <= 2);
 #ifdef HAS_DEVICE_SERIAL
 	int i;
