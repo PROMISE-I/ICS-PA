@@ -4,6 +4,7 @@
 
 make_instr_func(nemu_trap)
 {
+    BREAK_POINT;
 	int i = 0;
 	switch (cpu.eax)
 	{
