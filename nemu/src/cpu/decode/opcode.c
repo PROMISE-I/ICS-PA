@@ -27,7 +27,7 @@ instr_func opcode_entry[256] = {
     /* 0x5c - 0x5f*/ pop_esp, pop_ebp, pop_esi, pop_edi,
     /* 0x60 - 0x63*/ inv, inv, inv, inv,
     /* 0x64 - 0x67*/ inv, inv, data_size_16, inv,
-    /* 0x68 - 0x6b*/ inv, inv, push_i_b, inv,
+    /* 0x68 - 0x6b*/ push_i_v, inv, push_i_b, inv,
     /* 0x6c - 0x6f*/ inv, inv, inv, inv,
     /* 0x70 - 0x73*/ jo_short, jno_short, jb_short, jnb_short,
     /* 0x74 - 0x77*/ jz_short, jnz_short, jbe_short, jnbe_short,

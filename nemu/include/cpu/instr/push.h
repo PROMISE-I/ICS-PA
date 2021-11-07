@@ -12,5 +12,6 @@ make_instr_func(push_ebp);
 make_instr_func(push_esi);
 make_instr_func(push_edi);
 make_instr_func(push_i_b);
+make_instr_func(push_i_v);
 make_instr_func(push_rm_v);
 #endif
