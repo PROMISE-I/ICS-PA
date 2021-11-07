@@ -3,5 +3,6 @@
 /*
 Put the declarations of `sti' instructions here.
 */
-
+make_instr_func(std);
+make_instr_func(sti);
 #endif
