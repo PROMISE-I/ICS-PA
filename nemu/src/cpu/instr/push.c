@@ -151,7 +151,7 @@ make_instr_func(push_i_v){
     imm.type = OPR_IMM;
     imm.addr = eip + 1;
     imm.data_size = data_size;
-    len++;
+    len += data_size;
     
     cpu.esp -= 4;
     m.type = OPR_MEM;
