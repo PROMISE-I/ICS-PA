@@ -27,7 +27,6 @@ uint32_t loader()
 #else
 	elf = (void *)0x0;
 	Log("ELF loading from ram disk.");
-    BREAK_POINT;
 #endif
 
 	/* Load each program segment */
