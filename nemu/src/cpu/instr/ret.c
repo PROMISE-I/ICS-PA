@@ -31,7 +31,7 @@ make_instr_func(ret_near_w){
     operand_read(&imm);
     cpu.eip = m.val;
     cpu.esp += 4;
-    cpu.esp += imm.val;
+    cpu.esp += sign_ext(imm.val, 16);
     
     return 0;
 }
