@@ -94,6 +94,18 @@ void print_asm_3(char *instr, char *suffix, uint8_t len, OPERAND *opr_1, OPERAND
 #define decode_operand_a    \
 	opr_src.type = OPR_REG; \
 	opr_src.addr = REG_AL;
+	
+#define decode_operand_c    \
+	opr_src.type = OPR_REG; \
+	opr_src.addr = REG_CL;
+	
+#define decode_operand_d    \
+	opr_src.type = OPR_REG; \
+	opr_src.addr = REG_DL;
+	
+#define decode_operand_b    \
+	opr_src.type = OPR_REG; \
+	opr_src.addr = REG_BL;
 
 #define decode_operand_i    \
 	opr_src.type = OPR_IMM; \
