@@ -49,7 +49,7 @@ instr_func opcode_entry[256] = {
     /* 0xb4 - 0xb7*/ mov_i2r_b, mov_i2r_b, mov_i2r_b, mov_i2r_b,
     /* 0xb8 - 0xbb*/ mov_i2r_v, mov_i2r_v, mov_i2r_v, mov_i2r_v,
     /* 0xbc - 0xbf*/ mov_i2r_v, mov_i2r_v, mov_i2r_v, mov_i2r_v,
-    /* 0xc0 - 0xc3*/ group_2_b, group_2_v, inv, ret_near,
+    /* 0xc0 - 0xc3*/ group_2_b, group_2_v, ret_near_w, ret_near,
     /* 0xc4 - 0xc7*/ inv, inv, mov_i2rm_b, mov_i2rm_v,
     /* 0xc8 - 0xcb*/ inv, leave, inv, inv,
     /* 0xcc - 0xcf*/ inv, inv, inv, inv,
@@ -64,7 +64,7 @@ instr_func opcode_entry[256] = {
     /* 0xf0 - 0xf3*/ inv, break_point, inv, rep_repe,
     /* 0xf4 - 0xf7*/ hlt, inv, group_3_b, group_3_v,
     /* 0xf8 - 0xfb*/ clc, inv, inv, sti,
-    /* 0xfc - 0xff*/ cld, std, inv, group_5_indirect,
+    /* 0xfc - 0xff*/ cld, inv, inv, group_5_indirect,
 };
 
 /* 0x80 */
