@@ -2,7 +2,7 @@
 /*
 Put the implementations of `cmp' instructions here.
 */
-static void instr_exectue_2op()
+static void instr_execute_2op()
 {
     operand_read(&opr_src);
     operand_read(&opr_dest);
