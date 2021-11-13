@@ -14,11 +14,11 @@ make_instr_func(call_near){
     m.type = OPR_MEM;
     m.data_size = 32;
     m.addr = cpu.esp;
-    m.val = eip + 1 + data_size/8;
+    m.val = eip + 1 + data_size / 8;
     
     operand_write(&m);
     operand_read(&imm);
     
-    return len + data_size/8 + imm.val;
+    return len + data_size / 8 + imm.val;
 }
 

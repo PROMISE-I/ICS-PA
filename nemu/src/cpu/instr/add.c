@@ -53,7 +53,7 @@ make_instr_func(add_i2rm_v){
     operand_write(&rm);
     
     print_asm_2("add", "v", len, &imm, &rm);
-    return len + data_size/8;
+    return len + data_size / 8;
 }
 
 make_instr_func(add_i2rm_bv){
@@ -72,7 +72,7 @@ make_instr_func(add_i2rm_bv){
     rm.val = alu_add(sign_ext(imm.val, 8), rm.val, data_size);
     operand_write(&rm);
     
-    print_asm_2("add", "bv", len, &imm, &rm);
+    print_asm_2("add", "", len, &imm, &rm);
     return len + 1;
 }
 
@@ -87,6 +87,6 @@ make_instr_func(add_i2a_v){
     operand_read(&imm);
     cpu.eax = alu_add(cpu.eax, sign_ext(imm.val, data_size), 32);
     
-    print_asm_1("add", "v", len, &imm);
-    return len + data_size/8;
+    print_asm_1("add", "", len, &imm);
+    return len + data_size / 8;
 }

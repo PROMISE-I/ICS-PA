@@ -24,7 +24,7 @@ make_instr_func(cmp_i2eax_v){
     imm.type = OPR_IMM;
     imm.data_size = data_size;
     imm.addr = eip + 1;
-    len =+ data_size/8;
+    len =+ data_size / 8;
     
     operand_read(&imm);
     alu_sub(imm.val, cpu.eax, data_size);
@@ -65,7 +65,7 @@ make_instr_func(cmp_i2rm_v){
     operand_read(&rm);
     alu_sub(imm.val, rm.val, data_size);
     
-    return len + data_size/8;
+    return len + data_size / 8;
 }
 
 make_instr_func(cmp_i2rm_bv){
