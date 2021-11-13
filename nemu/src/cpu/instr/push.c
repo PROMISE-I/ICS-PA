@@ -179,7 +179,7 @@ make_instr_func(push_rm_v){
     m.addr = cpu.esp;
     
     operand_read(&rm);
-    m.val = rm.val;
+    m.val = sign_ext(rm.val, data_size);
     operand_write(&m);
     
     return len;
