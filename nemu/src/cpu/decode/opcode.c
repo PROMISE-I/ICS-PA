@@ -29,10 +29,10 @@ instr_func opcode_entry[256] = {
     /* 0x64 - 0x67*/ inv, inv, data_size_16, inv,
     /* 0x68 - 0x6b*/ push_i_v, inv, push_i_b, inv,
     /* 0x6c - 0x6f*/ inv, inv, inv, inv,
-    /* 0x70 - 0x73*/ jo_short, jno_short, jb_short, jnb_short,
-    /* 0x74 - 0x77*/ jz_short, jnz_short, jbe_short, jnbe_short,
-    /* 0x78 - 0x7b*/ js_short, jns_short, jp_short, jnp_short,
-    /* 0x7c - 0x7f*/ jl_short, jnl_short, jle_short, jnle_short,
+    /* 0x70 - 0x73*/ jo_short_, jno_short_, jb_short_, jae_short_,
+    /* 0x74 - 0x77*/ je_short_, jne_short_, jna_short_, ja_short_,
+    /* 0x78 - 0x7b*/ js_short_, jns_short_, jp_short_, jnp_short_,
+    /* 0x7c - 0x7f*/ jl_short_, jge_short_, jle_short_, jg_short_,
     /* 0x80 - 0x83*/ group_1_b, group_1_v, nemu_trap, group_1_bv,
     /* 0x84 - 0x87*/ test_r2rm_b, test_r2rm_v, inv, inv,
     /* 0x88 - 0x8b*/ mov_r2rm_b, mov_r2rm_v, mov_rm2r_b, mov_rm2r_v,
@@ -113,7 +113,7 @@ instr_func group_3_v_entry[8] =
 
 /* 0xff */
 instr_func group_5_indirect_entry[8] =
-    {inc_rm_v, dec_rm_v, inv, inv, jmp_rm_v, inv, push_rm_v, inv};
+    {inc_rm_v, dec_rm_v, inv, inv, inv, inv, push_rm_v, inv};
 
 instr_func group_7_entry[8] =
     {inv, inv, inv, inv, inv, inv, inv, inv};
@@ -183,10 +183,10 @@ instr_func opcode_2_byte_entry[256] = {
     /* 0x74 - 0x77*/ inv, inv, inv, inv,
     /* 0x78 - 0x7b*/ inv, inv, inv, inv,
     /* 0x7c - 0x7f*/ inv, inv, inv, inv,
-    /* 0x80 - 0x83*/ jo_v, jno_v, jb_v, jnb_v,
-    /* 0x84 - 0x87*/ jz_v, jnz_v, jbe_v, jnbe_v,
-    /* 0x88 - 0x8b*/ js_v, jns_v, jp_v, jnp_v,
-    /* 0x8c - 0x8f*/ jl_v, jnl_v, jle_v, jnle_v,
+    /* 0x80 - 0x83*/ jo_near, jno_near, jb_v, jae_near,
+    /* 0x84 - 0x87*/ je_near, jne_near, jna_near, ja_near,
+    /* 0x88 - 0x8b*/ js_near, jns_near, jp_near, jnp_near,
+    /* 0x8c - 0x8f*/ jl_near, jge_near, jle_near, jg_near,
     /* 0x90 - 0x93*/ seto_b, setno_b, setb_b, setae_b,
     /* 0x94 - 0x97*/ sete_b, setne_b, setbe_b, seta_b,
     /* 0x98 - 0x9b*/ inv, inv, inv, inv,
