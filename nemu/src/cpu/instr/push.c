@@ -71,7 +71,7 @@ make_instr_func(push_esp){
     m.type = OPR_MEM;
     m.data_size = 32;
     m.addr = cpu.esp;
-    m.val = cpu.esp;
+    m.val = cpu.esp + 4;//此处是之前的esp的值
     
     operand_write(&m);
     

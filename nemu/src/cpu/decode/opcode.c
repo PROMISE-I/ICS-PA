@@ -22,7 +22,7 @@ instr_func opcode_entry[256] = {
     /* 0x48 - 0x4b*/ dec_a_l, dec_c_l, dec_d_l, dec_b_l,
     /* 0x4c - 0x4f*/ dec_esp, dec_ebp, dec_esi, dec_edi,
     /* 0x50 - 0x53*/ push_eax, push_ecx, push_edx, push_ebx,
-    /* 0x54 - 0x57*/ push_esp, push_ebp, push_esi, push_edi,
+    /* 0x54 - 0x57*/ inv, push_ebp, push_esi, push_edi,
     /* 0x58 - 0x5b*/ pop_eax, pop_ecx, pop_edx, pop_ebx,
     /* 0x5c - 0x5f*/ inv, pop_ebp, pop_esi, pop_edi,
     /* 0x60 - 0x63*/ inv, inv, inv, inv,
