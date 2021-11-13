@@ -2,71 +2,21 @@
 /*
 Put the implementations of `cmp' instructions here.
 */
-make_instr_func(cmp_i2al_b){
-    OPERAND imm;
-    
-    int len = 1;
-    imm.type = OPR_IMM;
-    imm.data_size = 8;
-    imm.addr = eip + 1;
-    len++;
-    
-    operand_read(&imm);
-    alu_sub(imm.val, cpu.eax, 8);
-    
-    return len;
+static void instr_exectue_2op()
+{
+    operand_read(&opr_src);
+    operand_read(&opr_dest);
+    alu_sub(opr_src.val, opr_dest.val, opr_src.data_size);
 }
 
-make_instr_func(cmp_i2eax_v){
-    OPERAND imm;
-    
-    int len = 1;
-    imm.type = OPR_IMM;
-    imm.data_size = data_size;
-    imm.addr = eip + 1;
-    len =+ data_size / 8;
-    
-    operand_read(&imm);
-    alu_sub(imm.val, cpu.eax, data_size);
-    
-    return len;
-}
-
-make_instr_func(cmp_i2rm_b){
-    OPERAND imm, rm;
-    
-    int len = 1;
-    rm.data_size = 8;
-    len += modrm_rm(eip + 1, &rm);
-    
-    imm.type = OPR_IMM;
-    imm.addr = eip + len;
-    imm.data_size = 8;
-    
-    operand_read(&imm);
-    operand_read(&rm);
-    alu_sub(imm.val, rm.val, 8);
-    
-    return len + 1;
-}
-
-make_instr_func(cmp_i2rm_v){
-    OPERAND imm, rm;
-    
-    int len = 1;
-    rm.data_size = data_size;
-    len += modrm_rm(eip + 1, &rm);
-    
-    imm.type = OPR_IMM;
-    imm.addr = eip + len;
-    imm.data_size = data_size;
-    
-    operand_read(&imm);
-    operand_read(&rm);
-    alu_sub(imm.val, rm.val, data_size);
-    
-    return len + data_size / 8;
-}
+make_instr_impl_2op(cmp, i, a, b)
+make_instr_impl_2op(cmp, i, a, v)
+make_instr_impl_2op(cmp, i, rm, b)
+make_instr_impl_2op(cmp, i, rm, v)
+make_instr_impl_2op(cmp, r, rm, b)
+make_instr_impl_2op(cmp, r, rm, v)
+make_instr_impl_2op(cmp, rm, r, b)
+make_instr_impl_2op(cmp, rm, r, v)
 
 make_instr_func(cmp_i2rm_bv){
     OPERAND imm, rm;
@@ -87,62 +37,128 @@ make_instr_func(cmp_i2rm_bv){
     return len + 1;
 }
 
-make_instr_func(cmp_r2rm_b){
-    OPERAND r, rm;
+// make_instr_func(cmp_i2al_b){
+//     OPERAND imm;
+    
+//     int len = 1;
+//     imm.type = OPR_IMM;
+//     imm.data_size = 8;
+//     imm.addr = eip + 1;
+//     len++;
+    
+//     operand_read(&imm);
+//     alu_sub(imm.val, cpu.eax, 8);
+    
+//     return len;
+// }
 
-    int len = 1;
-    r.data_size = 8;
-    rm.data_size = 8;
-    len += modrm_r_rm(eip+1, &r, &rm);
+// make_instr_func(cmp_i2eax_v){
+//     OPERAND imm;
     
-    operand_read(&r);
-    operand_read(&rm);
-    alu_sub(r.val ,rm.val, 8);
+//     int len = 1;
+//     imm.type = OPR_IMM;
+//     imm.data_size = data_size;
+//     imm.addr = eip + 1;
+//     len =+ data_size / 8;
     
-    return len;
-}
+//     operand_read(&imm);
+//     alu_sub(imm.val, cpu.eax, data_size);
+    
+//     return len;
+// }
 
-make_instr_func(cmp_r2rm_v){
-    OPERAND r, rm;
+// make_instr_func(cmp_i2rm_b){
+//     OPERAND imm, rm;
+    
+//     int len = 1;
+//     rm.data_size = 8;
+//     len += modrm_rm(eip + 1, &rm);
+    
+//     imm.type = OPR_IMM;
+//     imm.addr = eip + len;
+//     imm.data_size = 8;
+    
+//     operand_read(&imm);
+//     operand_read(&rm);
+//     alu_sub(imm.val, rm.val, 8);
+    
+//     return len + 1;
+// }
 
-    int len = 1;
-    r.data_size = data_size;
-    rm.data_size = data_size;
-    len += modrm_r_rm(eip+1, &r, &rm);
+// make_instr_func(cmp_i2rm_v){
+//     OPERAND imm, rm;
     
-    operand_read(&r);
-    operand_read(&rm);
-    alu_sub(r.val ,rm.val, data_size);
+//     int len = 1;
+//     rm.data_size = data_size;
+//     len += modrm_rm(eip + 1, &rm);
     
-    return len;
-}
+//     imm.type = OPR_IMM;
+//     imm.addr = eip + len;
+//     imm.data_size = data_size;
+    
+//     operand_read(&imm);
+//     operand_read(&rm);
+//     alu_sub(imm.val, rm.val, data_size);
+    
+//     return len + data_size / 8;
+// }
 
-make_instr_func(cmp_rm2r_b){
-    OPERAND rm, r;
-    
-    int len = 1;
-    rm.data_size = 8;
-    r.data_size = 8;
-    len += modrm_r_rm(eip+1, &r, &rm);
-    
-    operand_read(&rm);
-    operand_read(&r);
-    alu_sub(rm.val, r.val, 8);
-    
-    return len;
-}
+// make_instr_func(cmp_r2rm_b){
+//     OPERAND r, rm;
 
-make_instr_func(cmp_rm2r_v){
-    OPERAND rm, r;
+//     int len = 1;
+//     r.data_size = 8;
+//     rm.data_size = 8;
+//     len += modrm_r_rm(eip+1, &r, &rm);
     
-    int len = 1;
-    rm.data_size = data_size;
-    r.data_size = data_size;
-    len += modrm_r_rm(eip+1, &r, &rm);
+//     operand_read(&r);
+//     operand_read(&rm);
+//     alu_sub(r.val ,rm.val, 8);
     
-    operand_read(&rm);
-    operand_read(&r);
-    alu_sub(rm.val, r.val, data_size);
+//     return len;
+// }
+
+// make_instr_func(cmp_r2rm_v){
+//     OPERAND r, rm;
+
+//     int len = 1;
+//     r.data_size = data_size;
+//     rm.data_size = data_size;
+//     len += modrm_r_rm(eip+1, &r, &rm);
     
-    return len;
-}
+//     operand_read(&r);
+//     operand_read(&rm);
+//     alu_sub(r.val ,rm.val, data_size);
+    
+//     return len;
+// }
+
+// make_instr_func(cmp_rm2r_b){
+//     OPERAND rm, r;
+    
+//     int len = 1;
+//     rm.data_size = 8;
+//     r.data_size = 8;
+//     len += modrm_r_rm(eip+1, &r, &rm);
+    
+//     operand_read(&rm);
+//     operand_read(&r);
+//     alu_sub(rm.val, r.val, 8);
+    
+//     return len;
+// }
+
+// make_instr_func(cmp_rm2r_v){
+//     OPERAND rm, r;
+    
+//     int len = 1;
+//     rm.data_size = data_size;
+//     r.data_size = data_size;
+//     len += modrm_r_rm(eip+1, &r, &rm);
+    
+//     operand_read(&rm);
+//     operand_read(&r);
+//     alu_sub(rm.val, r.val, data_size);
+    
+//     return len;
+// }
