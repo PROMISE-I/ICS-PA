@@ -24,7 +24,7 @@ instr_func opcode_entry[256] = {
     /* 0x50 - 0x53*/ push_eax, push_ecx, push_edx, push_ebx,
     /* 0x54 - 0x57*/ push_esp, push_ebp, push_esi, push_edi,
     /* 0x58 - 0x5b*/ pop_eax, pop_ecx, pop_edx, pop_ebx,
-    /* 0x5c - 0x5f*/ pop_esp, pop_ebp, pop_esi, pop_edi,
+    /* 0x5c - 0x5f*/ inv, pop_ebp, pop_esi, pop_edi,
     /* 0x60 - 0x63*/ inv, inv, inv, inv,
     /* 0x64 - 0x67*/ inv, inv, data_size_16, inv,
     /* 0x68 - 0x6b*/ push_i_v, inv, push_i_b, inv,
@@ -64,7 +64,7 @@ instr_func opcode_entry[256] = {
     /* 0xf0 - 0xf3*/ inv, break_point, inv, rep_repe,
     /* 0xf4 - 0xf7*/ hlt, inv, group_3_b, group_3_v,
     /* 0xf8 - 0xfb*/ clc, inv, inv, sti,
-    /* 0xfc - 0xff*/ cld, std, inv, group_5_indirect,
+    /* 0xfc - 0xff*/ cld, inv, inv, group_5_indirect,
 };
 
 /* 0x80 */
