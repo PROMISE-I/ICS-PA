@@ -83,10 +83,10 @@ void init_cond()
 
 #ifdef HAS_DEVICE_VGA
 	/* Write some test data to the video memory. */
+	BREAK_POINT;
 	video_mapping_write_test();
 #endif
 	/* Load the program. */
-	BREAK_POINT;
 	uint32_t eip = loader();
 #ifdef HAS_DEVICE_VGA
 	/* Read data in the video memory to check whether 
