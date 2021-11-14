@@ -15,11 +15,11 @@ make_instr_func(call_near_indirect)
     m.type = OPR_MEM;
     m.addr = cpu.esp;
     
-    operand_read(&rm);
     m.val = cpu.eip + len;
     operand_write(&m);
     
-    cpu.eip = m.val;
+    operand_read(&rm);
+    cpu.eip = rm.val;
     
     return 0;
 }
