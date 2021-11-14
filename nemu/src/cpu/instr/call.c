@@ -2,6 +2,28 @@
 /*
 Put the implementations of `call' instructions here.
 */
+make_instr_func(call_near_indirect)
+{
+    OPERAND rm, m;
+    
+    int len = 1;
+    rm.data_size = data_size;
+    len += modrm_rm(eip+1, &rm);
+    
+    cpu.esp -= 4;
+    m.data_size = 32;
+    m.type = OPR_MEM;
+    m.addr = cpu.esp;
+    
+    operand_read(&rm);
+    m.val = cpu.eip + len;
+    operand_write(&m);
+    
+    cpu.eip = m.val;
+    
+    return 0;
+}
+
 make_instr_func(call_near){
     OPERAND imm,m;
     
