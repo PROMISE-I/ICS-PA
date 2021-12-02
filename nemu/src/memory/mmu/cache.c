@@ -96,7 +96,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    block_offset = (paddr & 0x3F);
 	    block_num = ((paddr >> 6) & (0xFFFFFFFF >> 6));
 	    set_num = block_num & 0x7F;
-	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13);
+	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13));
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {
