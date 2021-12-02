@@ -144,7 +144,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            CacheLine line = cache[set_num * 8 + line_offset];
 	            
 	            //load byte from memory
-	            load_from_memory(line, tag, block_num);
+	            load_from_memory(&line, tag, block_num);
                 
                 res = (res << 4) + line.data[block_offset];
                 paddr += 4;
