@@ -65,13 +65,13 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
 {
     uint32_t data_offset = 0;
-    line.valid_bit = 1;
-    line.tag = tag;
+    line->valid_bit = 1;
+    line->tag = tag;
 
     for (data_offset = 0; data_offset < 64; data_offset++)
     {
         paddr_t paddr_data = (block_num << 6) + data_offset;
-        line.data[data_offset] = hw_mem_read(paddr_data, 1);
+        line->data[data_offset] = hw_mem_read(paddr_data, 1);
     }
 }
 
