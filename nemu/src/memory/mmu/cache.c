@@ -70,8 +70,10 @@ static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
 
     for (data_offset = 0; data_offset < 64; data_offset++)
     {
+        uint32_t temp;
         paddr_t paddr_data = (block_num << 6) + data_offset;
         line->data[data_offset] = hw_mem_read(paddr_data, 1);
+        temp = line->data[data_offset];
     }
 }
 
@@ -114,7 +116,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    }//end for hit situation
 	    
 	    //miss
-	    if (!is_hit)
+	    if (is_hit != 1)
 	    {
 	        uint32_t is_free = 0;
 	        
