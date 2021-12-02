@@ -6,9 +6,9 @@ CacheLine cache[1024];
 void init_cache()
 {
 	// implement me in PA 3-1
-	int line = 0;
-	for (; line < LINE_NUMBER; line_number++){
-	    cache[line].valid_bit = 0;
+	int line_number = 0;
+	for (; line_number < LINE_NUMBER; line_number++){
+	    cache[line_number].valid_bit = 0;
 	}
 }
 
@@ -32,7 +32,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	    block_offset = (paddr & 0x3F);
 	    block_num = ((paddr >> 6) & (0xFFFFFFFF >> 6));
 	    set_num = block_num & 0x7F;
-	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13);
+	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13));
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {
