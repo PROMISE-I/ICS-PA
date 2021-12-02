@@ -36,8 +36,8 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	    
 	    block_offset = (paddr & 0x3F);
 	    block_num = ((paddr >> 6) & (0xFFFFFFFF >> 6));
-	    set_num = block_num & 0x7F;
-	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13));
+	    set_num = block_num & 0x7;
+	    tag = ((block_num >> 3) & (0xFFFFFFFF >> 9));
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {
@@ -95,8 +95,8 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    
 	    block_offset = (paddr & 0x3F);
 	    block_num = ((paddr >> 6) & (0xFFFFFFFF >> 6));
-	    set_num = block_num & 0x7F;
-	    tag = ((block_num >> 7) & (0xFFFFFFFF >> 13));
+	    set_num = block_num & 0x7;
+	    tag = ((block_num >> 3) & (0xFFFFFFFF >> 9));
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {

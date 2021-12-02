@@ -10,7 +10,7 @@
 typedef struct
 {
     uint32_t valid_bit : 1;
-    uint32_t tag : 7;
+    uint32_t tag : 23;
     char data[64];
 } CacheLine;
 
