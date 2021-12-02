@@ -1,4 +1,8 @@
 #include "memory/mmu/cache.h"
+#include "memory/memory.h"
+#include <stdlib.h>
+
+
 //cache object
 CacheLine cache[1024];
 
