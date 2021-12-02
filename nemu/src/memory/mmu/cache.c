@@ -74,6 +74,7 @@ static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
         paddr_t paddr_data = (block_num << 6) + data_offset;
         line->data[data_offset] = hw_mem_read(paddr_data, 1);
         temp = line->data[data_offset];
+        printf("%x", temp);
     }
 }
 
