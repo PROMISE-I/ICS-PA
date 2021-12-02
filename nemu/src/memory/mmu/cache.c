@@ -1,5 +1,5 @@
 #include "memory/mmu/cache.h"
-#include "memory/memory.h"
+#include "../memory.c"
 #include <stdlib.h>
 
 
