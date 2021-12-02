@@ -4,6 +4,16 @@
 #include "nemu.h"
 
 #ifdef CACHE_ENABLED
+#define LINE_NUMBER 1024
+
+//struct of CacheLine
+typedef struct
+{
+    uint32_t valid_bit : 1;
+    uint32_t tag : 7;
+    char data[64];
+} CacheLine;
+
 
 // init the cache
 void init_cache();
