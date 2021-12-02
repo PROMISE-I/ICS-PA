@@ -45,7 +45,6 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	        //hit the cache for this byte
 	        if (line.valid_bit && tag == line.tag)
 	        {
-	            uint32_t data_offset = 0;
 	            paddr_t paddr_data = (block_num << 6) + block_offset;
 	            
 	            line.data[block_offset] = (char)the_byte;
