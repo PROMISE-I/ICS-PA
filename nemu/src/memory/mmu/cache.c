@@ -62,7 +62,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 }
 
 
-static void load_from_memory(CacheLine line, uint32_t tag, uint32_t block_num)
+static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
 {
     uint32_t data_offset = 0;
     line.valid_bit = 1;
@@ -129,7 +129,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	                is_free = 1;
 	                
 	                //load byte from memory
-	                load_from_memory(line, tag, block_num);
+	                load_from_memory(&line, tag, block_num);
 	                
 	                res = (res << 4) + line.data[block_offset];
 	                paddr += 4;
