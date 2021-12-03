@@ -47,13 +47,13 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	        if ((line->valid_bit == 1) && (tag == line->tag))
 	        {
 	            line->data[block_offset] = (uint8_t)the_byte;
-	            
-	            //paddr add a byte
-	            paddr += 1;
 	            break;
 	        }//end write for this byte
 	    }// end for search
+	    
 	    hw_mem_write(paddr, 1, the_byte);
+	    //paddr add a byte
+	    paddr += 1;
 	    
 	}//end write per byte
 	
