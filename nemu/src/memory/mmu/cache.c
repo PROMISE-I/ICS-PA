@@ -44,7 +44,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	        CacheLine *line = &cache[set_num * 8 + line_offset];
 	        
 	        //hit the cache for this byte
-	        if ((line->valid_bit == 1) && (tag == line.tag))
+	        if ((line->valid_bit == 1) && (tag == line->tag))
 	        {
 	            paddr_t paddr_data = (block_num << 6) + block_offset;
 	            
@@ -104,9 +104,9 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        CacheLine *line = &cache[set_num * 8 + line_offset];
 	        
 	        //hit the cache for this byte
-	        if (line->valid_bit && tag == line.tag)
+	        if (line->valid_bit && tag == line->tag)
 	        {
-	            res = res + (line.data[block_offset] << (time * 8));
+	            res = res + (line->data[block_offset] << (time * 8));
 	            //paddr add a byte
 	            paddr += 4;
 	            is_hit = 1;
@@ -124,7 +124,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        {
 	            CacheLine *line = &cache[set_num * 8 + line_offset];
 	           
-	            if (line.valid_bit == 0)
+	            if (line->valid_bit == 0)
 	            {
 	                printf("ENTER THE HIT SITUATION AT LINE OFFSET %x.\n", line_offset);
 	                //we have found a free area 
