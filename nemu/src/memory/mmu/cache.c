@@ -143,7 +143,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        //there is no free area, so we need to replace a random line
 	        if (!is_free)
 	        {
-	            line_offset = rand() % 8;
+	            line_offset = 1; //rand() % 8;
 	            CacheLine line = cache[set_num * 8 + line_offset];
 	            
 	            //load byte from memory
