@@ -41,6 +41,12 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 {
 #ifdef CACHE_ENABLED
         cache_write(paddr, len, data);
+        uint32_t ret = cache_read(paddr, len);
+        if (ret != data)
+        {
+            printf("\nret: %x, data: %x", ret, data);
+            assert(ret == data);
+        }
 #else
 	    hw_mem_write(paddr, len, data);
 #endif
