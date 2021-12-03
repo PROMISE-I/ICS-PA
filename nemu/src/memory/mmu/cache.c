@@ -48,7 +48,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	        {
 	            paddr_t paddr_data = (block_num << 6) + block_offset;
 	            
-	            line.data[block_offset] = (char)the_byte;
+	            line.data[block_offset] = (uint8_t)the_byte;
 	            hw_mem_write(paddr_data, 1, the_byte);
 	            
 	            //paddr add a byte
@@ -70,11 +70,8 @@ static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
 
     for (data_offset = 0; data_offset < 64; data_offset++)
     {
-        uint32_t temp;
         paddr_t paddr_data = (block_num << 6) + data_offset;
         line->data[data_offset] = hw_mem_read(paddr_data, 1);
-        temp = line->data[data_offset];
-        printf("%x", temp);
     }
 }
 
