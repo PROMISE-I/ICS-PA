@@ -106,7 +106,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        //hit the cache for this byte
 	        if (line.valid_bit && tag == line.tag)
 	        {
-	            res = res + line.data[block_offset] << (time * 4);
+	            res = res + (line.data[block_offset] << (time * 4));
 	            //paddr add a byte
 	            paddr += 4;
 	            is_hit = 1;
@@ -132,7 +132,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	                //load byte from memory
 	                load_from_memory(&line, tag, block_num);
 	                
-	                res = res + line.data[block_offset] << (time * 4);
+	                res = res + (line.data[block_offset] << (time * 4));
 	                paddr += 4;
 	                break;
 	            }
@@ -147,7 +147,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            //load byte from memory
 	            load_from_memory(&line, tag, block_num);
                 
-                res = res + line.data[block_offset] << (time * 4);
+                res = res + (line.data[block_offset] << (time * 4));
                 paddr += 4;
 	        }
 	    }//end miss
