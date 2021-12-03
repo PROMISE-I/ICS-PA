@@ -1,5 +1,5 @@
 #include "memory/mmu/cache.h"
-#include <stdlib.h>
+
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len);
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data);
