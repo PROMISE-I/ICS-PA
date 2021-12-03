@@ -41,14 +41,14 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {
-	        CacheLine line = cache[set_num * 8 + line_offset];
+	        CacheLine *line = &cache[set_num * 8 + line_offset];
 	        
 	        //hit the cache for this byte
-	        if ((line.valid_bit == 1) && (tag == line.tag))
+	        if ((line->valid_bit == 1) && (tag == line.tag))
 	        {
 	            paddr_t paddr_data = (block_num << 6) + block_offset;
 	            
-	            line.data[block_offset] = (uint8_t)the_byte;
+	            line->data[block_offset] = (uint8_t)the_byte;
 	            hw_mem_write(paddr_data, 1, the_byte);
 	            
 	            //paddr add a byte
@@ -62,18 +62,18 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 }
 
 
-// static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
-// {
-//     uint32_t data_offset = 0;
-//     line->valid_bit = 1;
-//     line->tag = tag;
+static void load_from_memory(CacheLine *line, uint32_t tag, uint32_t block_num)
+{
+    uint32_t data_offset = 0;
+    line->valid_bit = 1;
+    line->tag = tag;
 
-//     for (data_offset = 0; data_offset < 64; data_offset++)
-//     {
-//         paddr_t paddr_data = (block_num << 6) + data_offset;
-//         line->data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
-//     }
-// }
+    for (data_offset = 0; data_offset < 64; data_offset++)
+    {
+        paddr_t paddr_data = (block_num << 6) + data_offset;
+        line->data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
+    }
+}
 
 
 // read data from cache
@@ -101,10 +101,10 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    
 	    for (line_offset = 0; line_offset < 8; line_offset++)
 	    {
-	        CacheLine line = cache[set_num * 8 + line_offset];
+	        CacheLine *line = &cache[set_num * 8 + line_offset];
 	        
 	        //hit the cache for this byte
-	        if (line.valid_bit && tag == line.tag)
+	        if (line->valid_bit && tag == line.tag)
 	        {
 	            res = res + (line.data[block_offset] << (time * 8));
 	            //paddr add a byte
@@ -122,27 +122,18 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        //there is any free areas?
 	        for (line_offset = 0; line_offset < 8; line_offset++)
 	        {
-	            CacheLine line = cache[set_num * 8 + line_offset];
+	            CacheLine *line = &cache[set_num * 8 + line_offset];
 	           
 	            if (line.valid_bit == 0)
 	            {
-	                printf("/nENTER THE HIT SITUATION AT LINE OFFSET %x.\n", line_offset);
+	                printf("ENTER THE HIT SITUATION AT LINE OFFSET %x.\n", line_offset);
 	                //we have found a free area 
 	                is_free = 1;
 	                
 	                //load byte from memory
-	                //load_from_memory(&line, tag, block_num);
-	                uint32_t data_offset = 0;
-                    line.valid_bit = 1;
-                    line.tag = tag;
-                    
-                    for (data_offset = 0; data_offset < 64; data_offset++)
-                    {
-                        paddr_t paddr_data = (block_num << 6) + data_offset;
-                        line.data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
-                    }
+	                load_from_memory(line, tag, block_num);
 	                
-	                res = res + (line.data[block_offset] << (time * 8));
+	                res = res + (line->data[block_offset] << (time * 8));
 	                paddr += 4;
 	                break;
 	            }
@@ -153,22 +144,12 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        {
 	            printf("ENTER THE REPLACE SITUATION.");
 	            line_offset = 1; //rand() % 8;
-	            CacheLine line = cache[set_num * 8 + line_offset];
+	            CacheLine *line = &cache[set_num * 8 + line_offset];
 	            
 	            //load byte from memory
-	            //load_from_memory(&line, tag, block_num);
-                uint32_t data_offset = 0;
-                line.valid_bit = 1;
-                line.tag = tag;
-            
-                for (data_offset = 0; data_offset < 64; data_offset++)
-                {
-                    paddr_t paddr_data = (block_num << 6) + data_offset;
-                    line.data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
-                }
+	            load_from_memory(line, tag, block_num);
                 
-                
-                res = res + (line.data[block_offset] << (time * 8));
+                res = res + (line->data[block_offset] << (time * 8));
                 paddr += 4;
 	        }
 	    }//end miss
