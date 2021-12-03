@@ -126,7 +126,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	           
 	            if (line->valid_bit == 0)
 	            {
-	                printf("ENTER THE HIT SITUATION AT LINE OFFSET %x.\n", line_offset);
+	                printf("ENTER THE IS_FREE SITUATION AT LINE OFFSET %x.\n", line_offset);
 	                //we have found a free area 
 	                is_free = 1;
 	                
