@@ -52,7 +52,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	            hw_mem_write(paddr_data, 1, the_byte);
 	            
 	            //paddr add a byte
-	            paddr += 4;
+	            paddr += 1;
 	            break;
 	        }//end write for this byte
 	    }// end for search
@@ -108,7 +108,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        {
 	            res = res + (line->data[block_offset] << (time * 8));
 	            //paddr add a byte
-	            paddr += 4;
+	            paddr += 1;
 	            is_hit = 1;
 	            break;
 	        }
@@ -134,7 +134,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	                load_from_memory(line, tag, block_num);
 	                
 	                res = res + (line->data[block_offset] << (time * 8));
-	                paddr += 4;
+	                paddr += 1;
 	                break;
 	            }
 	        }
@@ -150,7 +150,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            load_from_memory(line, tag, block_num);
                 
                 res = res + (line->data[block_offset] << (time * 8));
-                paddr += 4;
+                paddr += 1;
 	        }
 	    }//end miss
 	    
