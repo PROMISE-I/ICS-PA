@@ -81,6 +81,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 {
 	// implement me in PA 3-1
 	uint32_t res = 0;
+	uint32_t time = 0;
 	
 	uint32_t block_offset;
 	uint32_t block_num;
@@ -88,7 +89,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	uint32_t tag;
 	
 	//read cache every byte per time
-	for (;len > 0; len--)
+	for (time = 0;time < len; time++)
 	{
 	    uint32_t line_offset = 0;
 	    uint32_t is_hit = 0;
@@ -105,7 +106,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        //hit the cache for this byte
 	        if (line.valid_bit && tag == line.tag)
 	        {
-	            res = (res << 4) + line.data[block_offset];
+	            res = res + line.data[block_offset] << (time * 4);
 	            //paddr add a byte
 	            paddr += 4;
 	            is_hit = 1;
@@ -131,7 +132,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	                //load byte from memory
 	                load_from_memory(&line, tag, block_num);
 	                
-	                res = (res << 4) + line.data[block_offset];
+	                res = res + line.data[block_offset] << (time * 4);
 	                paddr += 4;
 	                break;
 	            }
@@ -146,7 +147,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            //load byte from memory
 	            load_from_memory(&line, tag, block_num);
                 
-                res = (res << 4) + line.data[block_offset];
+                res = res + line.data[block_offset] << (time * 4);
                 paddr += 4;
 	        }
 	    }//end miss
