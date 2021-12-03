@@ -44,7 +44,7 @@ void cache_write(paddr_t paddr, size_t len, uint32_t data)
 	        CacheLine line = cache[set_num * 8 + line_offset];
 	        
 	        //hit the cache for this byte
-	        if (line.valid_bit && tag == line.tag)
+	        if ((line.valid_bit == 1) && (tag == line.tag))
 	        {
 	            paddr_t paddr_data = (block_num << 6) + block_offset;
 	            
@@ -115,7 +115,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	    }//end for hit situation
 	    
 	    //miss
-	    if (is_hit != 1)
+	    if (is_hit == 0)
 	    {
 	        uint32_t is_free = 0;
 	        
@@ -124,7 +124,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        {
 	            CacheLine line = cache[set_num * 8 + line_offset];
 	           
-	            if (!line.valid_bit)
+	            if (line.valid_bit == 0)
 	            {
 	                //we have found a free area 
 	                is_free = 1;
@@ -139,7 +139,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        }
 	        
 	        //there is no free area, so we need to replace a random line
-	        if (!is_free)
+	        if (is_free == 0)
 	        {
 	            line_offset = 1; //rand() % 8;
 	            CacheLine line = cache[set_num * 8 + line_offset];
