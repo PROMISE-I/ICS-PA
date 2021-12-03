@@ -1,4 +1,5 @@
 #include "memory/mmu/cache.h"
+#include <stdlib.h>
 
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len);
@@ -125,6 +126,7 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            if (line->valid_bit == 0)
 	            {
 	                //printf("ENTER THE IS_FREE SITUATION AT LINE OFFSET %x.\n", line_offset);
+	                
 	                //we have found a free area 
 	                is_free = 1;
 	                
@@ -141,7 +143,8 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	        if (is_free == 0)
 	        {
 	            //printf("ENTER THE REPLACE SITUATION.");
-	            line_offset = 1; //rand() % 8;
+	            
+	            line_offset = rand() % 8;
 	            CacheLine *line = &cache[set_num * 8 + line_offset];
 	            
 	            //load byte from memory
