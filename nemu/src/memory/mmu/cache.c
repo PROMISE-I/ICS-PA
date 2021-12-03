@@ -131,7 +131,16 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	                is_free = 1;
 	                
 	                //load byte from memory
-	                load_from_memory(&line, tag, block_num);
+	                //load_from_memory(&line, tag, block_num);
+	                uint32_t data_offset = 0;
+                    line.valid_bit = 1;
+                    line.tag = tag;
+                    
+                    for (data_offset = 0; data_offset < 64; data_offset++)
+                    {
+                        paddr_t paddr_data = (block_num << 6) + data_offset;
+                        line.data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
+                    }
 	                
 	                res = res + (line.data[block_offset] << (time * 8));
 	                paddr += 4;
@@ -147,7 +156,17 @@ uint32_t cache_read(paddr_t paddr, size_t len)
 	            CacheLine line = cache[set_num * 8 + line_offset];
 	            
 	            //load byte from memory
-	            load_from_memory(&line, tag, block_num);
+	            //load_from_memory(&line, tag, block_num);
+                uint32_t data_offset = 0;
+                line.valid_bit = 1;
+                line.tag = tag;
+            
+                for (data_offset = 0; data_offset < 64; data_offset++)
+                {
+                    paddr_t paddr_data = (block_num << 6) + data_offset;
+                    line.data[data_offset] = (uint8_t)hw_mem_read(paddr_data, 1);
+                }
+                
                 
                 res = res + (line.data[block_offset] << (time * 8));
                 paddr += 4;
