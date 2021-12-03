@@ -27,6 +27,7 @@ uint32_t paddr_read(paddr_t paddr, size_t len)
         uint32_t right = hw_mem_read(paddr, len);
         if (ret != right){
             printf("\n\nmy ret: %x; answer: %x\n\n",ret, right);
+            fflush(stdout);
             //assert(ret == right);
         }
         
