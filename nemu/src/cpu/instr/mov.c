@@ -20,6 +20,19 @@ make_instr_impl_2op(mov, a, o, v)
 make_instr_impl_2op(mov, o, a, b)
 make_instr_impl_2op(mov, o, a, v)
 
+make_instr_func(mov_rm2s_w)
+{
+    int len = 1;
+    OPERAND rm, r;
+    rm.data_size = 16;
+    r.data_size = 16;
+    len += modrm_r_rm(eip + 1, &r, &rm);
+    
+    operand_read(&rm);
+    cpu.segReg[r.val] = (rm.val & 0xffff);
+    return len;
+}
+
 make_instr_func(mov_zrm82r_v) {
 	int len = 1;
 	OPERAND r, rm;

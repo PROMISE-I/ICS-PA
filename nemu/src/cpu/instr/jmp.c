@@ -17,6 +17,7 @@ make_instr_func(jmp_far_imm)
     cpu.cs.val = imm1.val;
     cpu.eip = imm2.val;
     
+    print_asm_2("ljmp", "", 0, &imm1, &imm2);
     return 0;
 }
 
