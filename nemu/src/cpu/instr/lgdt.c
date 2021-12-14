@@ -2,6 +2,7 @@
 /*
 Put the implementations of `lgdt' instructions here.
 */
+#ifdef IA32_SEG
 make_instr_func(lgdt)
 {
     OPERAND limit, base;
@@ -30,3 +31,4 @@ make_instr_func(lgdt)
     
     return 6;
 }
+#endif
