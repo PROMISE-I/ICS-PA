@@ -32,7 +32,7 @@ typedef struct {
             uint32_t ti : 1;
             uint32_t index : 13;
         };
-    }
+    };
     
     //the invisible part
     struct {
