@@ -29,7 +29,7 @@ make_instr_func(mov_rm2s_w)
     len += modrm_r_rm(eip + 1, &r, &rm);
     
     operand_read(&rm);
-    cpu.segReg[r.val] = (rm.val & 0xffff);
+    cpu.segReg[r.val].val = (rm.val & 0xffff);
     return len;
 }
 
