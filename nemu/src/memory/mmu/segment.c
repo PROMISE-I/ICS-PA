@@ -19,7 +19,7 @@ void load_sreg(uint8_t sreg)
 	 */
 	 SegReg *segReg = &cpu.segReg[sreg];
 	 laddr_t addr = cpu.gdtr.base + (uint32_t)(segReg->index & 0x1fff);
-	 SegDesc segDesc;
+	 SegDesc segDesc = (SegDesc)laddr_read(addr, sizeof(SegDesc));
 	 segDesc.val[0] = laddr_read(addr, 4);
 	 segDesc.val[1] = laddr_read(addr + 4, 4);
 	 
@@ -34,4 +34,5 @@ void load_sreg(uint8_t sreg)
 	 assert(segReg->base == 0);
 	 assert(segReg->limit == 0xfffff);
 	 assert(segDesc.granularity == 1);
+	 assert(segDesc.present == 1);
 }

@@ -2,3 +2,28 @@
 /*
 Put the implementations of `lgdt' instructions here.
 */
+make_instr_func(lgdt)
+{
+    OPERAND limit, base;
+    
+    limit.type = OPR_IMM;
+    limit.data_size = 16;
+    limit.addr = eip + 1;
+    
+    base.type = OPR_IMM;
+    base.data_size = 32;
+    base.addr = eip + 3;
+    
+    operand_read(&limit);
+    operand_read(&base);
+    
+    cpu.gdtr.limit = limit.val;
+    if(data_size == 32) {
+        cpu.gdtr.base = base.val;
+    }
+    else {
+        cpu.gdtr.base = (base.val & 0xffffff);
+    }
+    
+    return 7;
+}
