@@ -3,7 +3,5 @@
 /*
 Put the declarations of `lgdt' instructions here.
 */
-#ifndef IA32_SEG
 make_instr_func(lgdt);
-#endif
 #endif

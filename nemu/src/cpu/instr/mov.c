@@ -23,7 +23,7 @@ make_instr_impl_2op(mov, o, a, v)
 make_instr_func(mov_rm2s_w)
 {
     int len = 1;
-    #ifdef IA32_SEG
+#ifdef IA32_SEG
         OPERAND rm, r;
         rm.data_size = 16;
         r.data_size = 16;
@@ -32,7 +32,7 @@ make_instr_func(mov_rm2s_w)
         cpu.segReg[r.addr].val = rm.val;
         
         print_asm_2("mov", "", len, &rm, &r);
-    #endif
+#endif
     return len;
 }
 
