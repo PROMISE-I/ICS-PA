@@ -28,8 +28,7 @@ make_instr_func(mov_rm2s_w)
     r.data_size = 16;
     len += modrm_r_rm(eip + 1, &r, &rm);
     
-    operand_read(&rm);
-    cpu.segReg[r.val].val = rm.val;
+    cpu.segReg[r.addr].val = rm.val;
     return len;
 }
 
