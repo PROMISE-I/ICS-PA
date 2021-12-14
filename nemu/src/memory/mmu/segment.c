@@ -1,20 +1,22 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 
-#ifdef IA32_SEG
 // return the linear address from the virtual address and segment selector
 uint32_t segment_translate(uint32_t offset, uint8_t sreg)
 {
+#ifdef IA32_SEG
 	/* TODO: perform segment translation from virtual address to linear address
 	 * by reading the invisible part of the segment register 'sreg'
 	 */
 	uint32_t base = cpu.segReg[sreg].base;
 	return base + offset;
+#endif
 }
 
 // load the invisible part of a segment register
 void load_sreg(uint8_t sreg)
 {
+#ifdef IA32_SEG
 	/* TODO: load the invisibile part of the segment register 'sreg' by reading the GDT.
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
@@ -36,6 +38,5 @@ void load_sreg(uint8_t sreg)
 	 assert(segReg->limit == 0xfffff);
 	 assert(segDesc.granularity == 1);
 	 assert(segDesc.present == 1);
-}
-
 #endif
+}
