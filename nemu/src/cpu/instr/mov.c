@@ -29,6 +29,7 @@ make_instr_func(mov_rm2s_w)
     len += modrm_r_rm(eip + 1, &r, &rm);
     
     cpu.segReg[r.addr].val = rm.val;
+    print_asm_2("mov", "", &rm, &r);
     return len;
 }
 
