@@ -1,4 +1,24 @@
 #include "cpu/instr.h"
+make_instr_func(jmp_far_imm)
+{
+    OPERAND imm1, imm2;
+    
+    imm1.data_size = 16;
+    imm1.type = OPR_IMM;
+    imm1.addr = cpu.eip + 1;
+    
+    imm2.data_size = 32;
+    imm2.type = OPR_IMM;
+    imm2.addr = cpu.eip + 3;
+    
+    operand_read(&imm1);
+    operand_read(&imm2);
+    
+    cpu.cs.val = imm1.val;
+    cpu.eip = imm2.val;
+    
+    return 0;
+}
 
 make_instr_func(jmp_near)
 {
