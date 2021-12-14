@@ -29,7 +29,52 @@ make_instr_func(mov_rm2s_w)
     len += modrm_r_rm(eip + 1, &r, &rm);
     
     cpu.segReg[r.addr].val = rm.val;
+    
     print_asm_2("mov", "", len, &rm, &r);
+    return len;
+}
+
+make_instr_func(mov_c2r_l)
+{
+    int len = 1;
+    OPERAND c, rm;
+    rm.data_size = 32;
+    c.data_size = 32;
+    len += modrm_r_rm(eip + 1, &c, &rm);
+    
+    if (c.addr == 0) {
+        rm.val = cpu.cr0.val;
+    }
+#ifdef IA32_PAGE
+        else if (c.addr == 3) {
+            rm.val = cpu.cr3.val;
+        }
+#endif
+    operand_write(&rm);
+    
+    print_asm_2("mov","", len, %c, %rm);
+    return len;
+}
+
+make_instr_func(mov_r2c_l)
+{
+    int len = 1;
+    OPERAND c, rm;
+    rm.data_size = 32;
+    c.data_size = 32;
+    len += modrm_r_rm(eip + 1, &c, &rm);
+    
+    operand_read(&rm);
+    if (c.addr == 0) {
+        cpu.cr0.val = rm.val;
+    }
+#ifdef IA32_PAGE
+        else if (c.addr == 3) {
+            cpu.cr3.val = rm.val;
+        }
+#endif
+    
+    print_asm_2("mov","", len, %rm, %c);
     return len;
 }
 

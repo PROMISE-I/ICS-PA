@@ -1,7 +1,8 @@
 #ifndef __INSTR_MOV_H__
 #define __INSTR_MOV_H__
 make_instr_func(mov_rm2s_w);
-
+make_instr_func(mov_c2r_l);
+make_instr_func(mov_r2c_l);
 
 make_instr_func(mov_r2rm_b);
 make_instr_func(mov_r2rm_v);
