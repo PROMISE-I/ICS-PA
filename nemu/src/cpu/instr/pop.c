@@ -7,6 +7,7 @@ make_instr_func(pop_eax){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -21,6 +22,7 @@ make_instr_func(pop_ecx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -35,6 +37,7 @@ make_instr_func(pop_edx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -49,6 +52,7 @@ make_instr_func(pop_ebx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -63,6 +67,7 @@ make_instr_func(pop_esp){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -77,6 +82,7 @@ make_instr_func(pop_ebp){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -91,6 +97,7 @@ make_instr_func(pop_esi){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -105,6 +112,7 @@ make_instr_func(pop_edi){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);

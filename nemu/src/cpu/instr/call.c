@@ -12,6 +12,7 @@ make_instr_func(call_near_indirect)
     
     cpu.esp -= 4;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.type = OPR_MEM;
     m.addr = cpu.esp;
     
@@ -29,12 +30,14 @@ make_instr_func(call_near){
     
     int len = 1;
     imm.type = OPR_IMM;
+    imm.sreg = SERG_CS;
     imm.data_size = data_size;
     imm.addr = eip + len;
 
     cpu.esp -= 4;
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = eip + 1 + data_size / 8;
     

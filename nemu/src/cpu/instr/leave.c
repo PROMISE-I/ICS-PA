@@ -5,6 +5,7 @@ Put the implementations of `leave' instructions here.
 make_instr_func(leave){
     OPERAND m;
     m.type = OPR_MEM;
+    m.sreg = SERG_DS;
     m.data_size = 32;
     m.addr = cpu.ebp;
     

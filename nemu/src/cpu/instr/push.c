@@ -9,6 +9,7 @@ make_instr_func(push_eax){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.eax;
     
@@ -24,6 +25,7 @@ make_instr_func(push_ecx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.ecx;
     
@@ -39,6 +41,7 @@ make_instr_func(push_edx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.edx;
     
@@ -54,6 +57,7 @@ make_instr_func(push_ebx){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.ebx;
     
@@ -70,6 +74,7 @@ make_instr_func(push_esp){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.esp + 4;//此处是之前的esp的值
     
@@ -85,6 +90,7 @@ make_instr_func(push_ebp){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.ebp;
     
@@ -100,6 +106,7 @@ make_instr_func(push_esi){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.esi;
     
@@ -115,6 +122,7 @@ make_instr_func(push_edi){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     m.val = cpu.edi;
     
@@ -129,12 +137,14 @@ make_instr_func(push_i_b){
     int len = 1;
     imm.type = OPR_IMM;
     imm.addr = eip + 1;
+    imm.sreg = SERG_CS;
     imm.data_size = 8;
     len++;
     
     cpu.esp -= 4;
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&imm);
@@ -150,12 +160,14 @@ make_instr_func(push_i_v){
     int len = 1;
     imm.type = OPR_IMM;
     imm.addr = eip + 1;
+    imm.sreg = SERG_CS;
     imm.data_size = data_size;
     len += data_size / 8;
     
     cpu.esp -= 4;
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&imm);
@@ -176,6 +188,7 @@ make_instr_func(push_rm_v){
     
     m.type = OPR_MEM;
     m.data_size = 32;
+    m.sreg = SERG_DS;
     m.addr = cpu.esp;
     
     operand_read(&rm);
