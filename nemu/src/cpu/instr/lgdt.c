@@ -25,5 +25,5 @@ make_instr_func(lgdt)
         cpu.gdtr.base = (base.val & 0xffffff);
     }
     
-    return 7;
+    return 6;
 }
