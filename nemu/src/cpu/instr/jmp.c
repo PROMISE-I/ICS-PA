@@ -5,11 +5,11 @@ make_instr_func(jmp_far_imm)
     
     imm1.data_size = 16;
     imm1.type = OPR_IMM;
-    imm1.addr = cpu.eip + 1;
+    imm1.addr = cpu.eip + 5;
     
     imm2.data_size = 32;
     imm2.type = OPR_IMM;
-    imm2.addr = cpu.eip + 3;
+    imm2.addr = cpu.eip + 1;
     
     operand_read(&imm1);
     operand_read(&imm2);
