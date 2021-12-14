@@ -52,7 +52,7 @@ make_instr_func(mov_c2r_l)
 #endif
     operand_write(&rm);
     
-    print_asm_2("mov","", len, %c, %rm);
+    print_asm_2("mov","", len, &c, &rm);
     return len;
 }
 
@@ -74,7 +74,7 @@ make_instr_func(mov_r2c_l)
         }
 #endif
     
-    print_asm_2("mov","", len, %rm, %c);
+    print_asm_2("mov","", len, &rm, &c);
     return len;
 }
 
