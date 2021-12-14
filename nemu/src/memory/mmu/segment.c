@@ -1,6 +1,7 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 
+#ifdef IA32_SEG
 // return the linear address from the virtual address and segment selector
 uint32_t segment_translate(uint32_t offset, uint8_t sreg)
 {
@@ -36,3 +37,5 @@ void load_sreg(uint8_t sreg)
 	 assert(segDesc.granularity == 1);
 	 assert(segDesc.present == 1);
 }
+
+#endif
