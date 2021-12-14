@@ -24,6 +24,7 @@ make_instr_func(lgdt)
     else {
         cpu.gdtr.base = (base.val & 0xffffff);
     }
+    printf("base: %x, limit: %x\n", cpu.gdtr.base, cpu.gdtr.limit);
     
     return 6;
 }
