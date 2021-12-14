@@ -1,6 +1,7 @@
 #include "cpu/instr.h"
 make_instr_func(jmp_far_imm)
 {
+#ifdef IA32_SEG
     OPERAND imm1, imm2;
     
     imm1.data_size = 16;
@@ -20,6 +21,7 @@ make_instr_func(jmp_far_imm)
     cpu.eip = imm2.val;
     
     print_asm_2("ljmp", "", 0, &imm1, &imm2);
+#endif
     return 0;
 }
 
