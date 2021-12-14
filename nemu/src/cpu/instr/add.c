@@ -23,7 +23,7 @@ make_instr_func(add_i2rm_bv){
     len += modrm_rm(eip+1, &rm);
     
     imm.type = OPR_IMM;
-    imm.sreg = SERG_CS;
+    imm.sreg = SREG_CS;
     imm.addr = eip + len;
     imm.data_size = 8;
     

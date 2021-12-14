@@ -25,7 +25,7 @@ make_instr_func(sub_i2rm_bv){
     
     imm.type = OPR_IMM;
     imm.data_size = 8;
-    imm.sreg = SERG_CS;
+    imm.sreg = SREG_CS;
     imm.addr = eip + len;
     len += 1;
     

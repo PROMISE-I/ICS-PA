@@ -27,7 +27,7 @@ make_instr_func(cmp_i2rm_bv){
     
     imm.type = OPR_IMM;
     imm.addr = eip + len;
-    imm.sreg = SERG_CS;
+    imm.sreg = SREG_CS;
     imm.data_size = 8;
     
     operand_read(&imm);

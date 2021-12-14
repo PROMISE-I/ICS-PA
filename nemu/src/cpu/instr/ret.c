@@ -7,7 +7,7 @@ make_instr_func(ret_near){
     
     m.type = OPR_MEM;
     m.data_size = 32;
-    m.sreg = SERG_DS;
+    m.sreg = SREG_DS;
     m.addr = cpu.esp;
     
     operand_read(&m);
@@ -22,12 +22,12 @@ make_instr_func(ret_near_w){
     
     m.type = OPR_MEM;
     m.data_size = 32;
-    m.sreg = SERG_DS;
+    m.sreg = SREG_DS;
     m.addr = cpu.esp;
     
     imm.type = OPR_IMM;
     imm.data_size = 16;
-    imm.sreg = SERG_CS;
+    imm.sreg = SREG_CS;
     imm.addr = eip + 1;
     
     operand_read(&m);
