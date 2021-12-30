@@ -40,7 +40,7 @@ uint32_t loader()
 		{
 
 			// remove this panic!!!
-			panic("Please implement the loader");
+			//panic("Please implement the loader");
             uint32_t paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
             // printf("paddr in load: %x\n", paddr);
             // fflush(stdout);
