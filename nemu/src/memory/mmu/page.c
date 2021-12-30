@@ -5,6 +5,8 @@
 paddr_t page_translate(laddr_t laddr)
 {
 #ifndef TLB_ENABLED
+    printf("cpu.cr3: %x; laddr: %x", cpu.cr3, laddr);
+    fflush(stdout);
 	paddr_t PDEpaddr = (cpu.cr3.PDBR << 12) + ((laddr >> 22) & 0x3ff);
 	PDE pde;
 	pde.val = paddr_read(PDEpaddr, 4);
