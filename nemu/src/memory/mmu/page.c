@@ -5,7 +5,7 @@
 paddr_t page_translate(laddr_t laddr)
 {
 #ifndef TLB_ENABLED
-	paddr_t PDEpaddr = cpu.cr3.PDBR + ((laddr >> 22) & 0x2ff);
+	paddr_t PDEpaddr = (cpu.cr3.PDBR << 12) + ((laddr >> 22) & 0x2ff);
 	PDE pde;
 	pde.val = paddr_read(PDEpaddr, 4);
 	assert(pde.present == 1);
