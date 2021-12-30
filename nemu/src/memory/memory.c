@@ -55,42 +55,37 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 uint32_t laddr_read(laddr_t laddr, size_t len)
 {
     //todo: pa3-3
+    paddr_t paddr = laddr;
+    
     if (cpu.cr0.pe && cpu.cr0.paging) {
-        //printf("eip: %x\n", cpu.eip);
-        fflush(stdout);
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
             printf("you got me in page boundary!\n");
             fflush(stdout);            
             assert(0);
         } else{
-           paddr_t paddr = page_translate(laddr);
-           return paddr_read(paddr, len);
+           paddr = page_translate(laddr);
         }
-    } else{
-        return paddr_read(laddr, len);
     }
+    
+    return paddr_read(paddr, len);
 }
 
 void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     //todo: pa3-3
+    paddr_t paddr = laddr;
+    
     if (cpu.cr0.pe && cpu.cr0.paging) {
-        //printf("eip: %x\n", cpu.eip);
-        fflush(stdout);
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
-            // int i = 0;
-            // for (;i < 4 && laddr + i; i++)
-            // uint32_t high_part = 
             printf("you got me in page boundary!\n");
             fflush(stdout);    
             assert(0);
         } else{
-           paddr_t paddr = page_translate(laddr);
-           return paddr_write(paddr, len, data);
+           paddr = page_translate(laddr);
         }
-    } else{
-        return paddr_write(laddr, len, data);
     }
+    
+    paddr_write(paddr, len, data);
 }
 
 uint32_t vaddr_read(vaddr_t vaddr, uint8_t sreg, size_t len)
