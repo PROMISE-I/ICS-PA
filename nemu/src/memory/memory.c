@@ -75,7 +75,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
             assert(0);
         } else{
            paddr_t paddr = page_translate(laddr);
-           return paddr_read(paddr, len, data);
+           return paddr_write(paddr, len, data);
         }
     } else{
         return paddr_write(laddr, len, data);
