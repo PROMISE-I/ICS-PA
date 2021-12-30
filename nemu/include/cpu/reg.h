@@ -26,7 +26,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t reserve : 12;
-        uint32_t PDBR : 20;
+        uint32_t page_directory_base : 20;
     };
     uint32_t val;
 }CR3;
