@@ -41,7 +41,7 @@ uint32_t loader()
 
 			// remove this panic!!!
 			//panic("Please implement the loader");
-			uint32_t paddr = ph->vaddr;
+			uint32_t paddr = ph->p_vaddr;
 #ifdef IA32_PAGE
             paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
 #endif
