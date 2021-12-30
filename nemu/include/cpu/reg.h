@@ -22,6 +22,15 @@ typedef union {
     uint32_t val;
 }CR0;
 
+//define the CR3
+typedef union {
+    struct {
+        uint32_t reserve : 12;
+        uint32_t PDBR : 20;
+    };
+    uint32_t val;
+}CR3;
+
 //define the SegReg
 typedef struct {
     // the 16-bit visible part
