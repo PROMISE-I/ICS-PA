@@ -5,7 +5,7 @@
 paddr_t page_translate(laddr_t laddr)
 {
 #ifndef TLB_ENABLED
-    printf("cpu.cr3: %x; laddr: %x\n", cpu.cr3.val, laddr);
+    printf("cpu.cr3: %x; laddr: %x\n", cpu.cr3.PDBR, laddr);
 	paddr_t PDEpaddr = (cpu.cr3.PDBR << 12) + ((laddr >> 22) & 0x3ff);
 	printf("PDEpaddr: %x\n", PDEpaddr);
 	printf("eip: %x\n", cpu.eip);
