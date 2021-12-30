@@ -17,7 +17,7 @@ typedef union {
         uint32_t ts : 1;
         uint32_t et : 1;
         uint32_t reserve : 26;
-        uint32_t pg : 1;
+        uint32_t paging : 1;
     };
     uint32_t val;
 }CR0;
