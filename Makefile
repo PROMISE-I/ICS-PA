@@ -17,37 +17,37 @@ run: nemu
 
 run-kernel: nemu
 	$(call git_commit, "run-kernel", $(TIME_MAKE))
-	./nemu/nemu --autorun --testcase mov
-	./nemu/nemu --autorun --testcase mov-cmp
-	./nemu/nemu --autorun --testcase mov-c
-	./nemu/nemu --autorun --testcase mov-jcc
-	./nemu/nemu --autorun --testcase add
-	./nemu/nemu --autorun --testcase add-longlong
-	./nemu/nemu --autorun --testcase if-else
-	./nemu/nemu --autorun --testcase fib
-	./nemu/nemu --autorun --testcase bubble-sort
-	./nemu/nemu --autorun --testcase quick-sort
-	./nemu/nemu --autorun --testcase select-sort
-	./nemu/nemu --autorun --testcase max
-	./nemu/nemu --autorun --testcase min3
-	./nemu/nemu --autorun --testcase pascal
-	./nemu/nemu --autorun --testcase bit 
-	./nemu/nemu --autorun --testcase movsx
-	./nemu/nemu --autorun --testcase sub-longlong
-	./nemu/nemu --autorun --testcase fact
-	./nemu/nemu --autorun --testcase gotbaha
-	./nemu/nemu --autorun --testcase leap-year
-	./nemu/nemu --autorun --testcase matrix-mul-small
-	./nemu/nemu --autorun --testcase matrix-mul
-	./nemu/nemu --autorun --testcase mul-longlong 
-	./nemu/nemu --autorun --testcase prime
-	./nemu/nemu --autorun --testcase shuixianhua
-	./nemu/nemu --autorun --testcase sum
-	./nemu/nemu --autorun --testcase wanshu
-	./nemu/nemu --autorun --testcase struct
-	./nemu/nemu --autorun --testcase string
-	./nemu/nemu --autorun --testcase hello-str 
-	./nemu/nemu --autorun --testcase test-float
+	./nemu/nemu --autorun --kernel --testcase mov
+	./nemu/nemu --autorun --kernel --testcase mov-cmp
+	./nemu/nemu --autorun --kernel --testcase mov-c
+	./nemu/nemu --autorun --kernel --testcase mov-jcc
+	./nemu/nemu --autorun --kernel --testcase add
+	./nemu/nemu --autorun --kernel --testcase add-longlong
+	./nemu/nemu --autorun --kernel --testcase if-else
+	./nemu/nemu --autorun --kernel --testcase fib
+	./nemu/nemu --autorun --kernel --testcase bubble-sort
+	./nemu/nemu --autorun --kernel --testcase quick-sort
+	./nemu/nemu --autorun --kernel --testcase select-sort
+	./nemu/nemu --autorun --kernel --testcase max
+	./nemu/nemu --autorun --kernel --testcase min3
+	./nemu/nemu --autorun --kernel --testcase pascal
+	./nemu/nemu --autorun --kernel --testcase bit 
+	./nemu/nemu --autorun --kernel --testcase movsx
+	./nemu/nemu --autorun --kernel --testcase sub-longlong
+	./nemu/nemu --autorun --kernel --testcase fact
+	./nemu/nemu --autorun --kernel --testcase gotbaha
+	./nemu/nemu --autorun --kernel --testcase leap-year
+	./nemu/nemu --autorun --kernel --testcase matrix-mul-small
+	./nemu/nemu --autorun --kernel --testcase matrix-mul
+	./nemu/nemu --autorun --kernel --testcase mul-longlong 
+	./nemu/nemu --autorun --kernel --testcase prime
+	./nemu/nemu --autorun --kernel --testcase shuixianhua
+	./nemu/nemu --autorun --kernel --testcase sum
+	./nemu/nemu --autorun --kernel --testcase wanshu
+	./nemu/nemu --autorun --kernel --testcase struct
+	./nemu/nemu --autorun --kernel --testcase string
+	./nemu/nemu --autorun --kernel --testcase hello-str 
+	./nemu/nemu --autorun --kernel --testcase test-float
 
 debug: nemu
 	$(call git_commit, "debug", $(TIME_MAKE))
