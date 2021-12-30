@@ -56,6 +56,8 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 {
     //todo: pa3-3
     if (cpu.cr0.pe && cpu.cr0.paging) {
+        printf("eip: %x\n", cpu.eip);
+        fflush(stdout);
         if (((laddr + len) >> 12) != (laddr >> 12)) {// data cross the page boundary
             assert(0);
         } else{
@@ -71,6 +73,8 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     //todo: pa3-3
     if (cpu.cr0.pe && cpu.cr0.paging) {
+        printf("eip: %x\n", cpu.eip);
+        fflush(stdout);
         if (((laddr + len) >> 12) != (laddr >> 12)) {// data cross the page boundary
             assert(0);
         } else{
