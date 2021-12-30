@@ -8,7 +8,7 @@ paddr_t page_translate(laddr_t laddr)
     printf("cpu.cr3: %x; laddr: %x\n", cpu.cr3.PDBR, laddr);
 	paddr_t PDEpaddr = (cpu.cr3.PDBR << 12) + ((laddr >> 22) & 0x3ff);
 	//printf("PDEpaddr: %x\n", PDEpaddr);
-	printf("eip: %x\n", cpu.eip);
+	printf("eip: %x\n", cpu.eip << 12);
 	PDE pde;
 	pde.val = paddr_read(PDEpaddr, 4);
 	assert(pde.present == 1);
