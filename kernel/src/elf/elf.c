@@ -41,6 +41,8 @@ uint32_t loader()
 			// remove this panic!!!
 			//panic("Please implement the loader");
             uint32_t paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
+            printf("paddr in load: %x\n", paddr);
+            fflush(stdout);
 /* TODO: copy the segment from the ELF file to its proper memory area */
             memcpy((void *)paddr, (void *)ph->p_offset, ph->p_filesz);
 /* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
