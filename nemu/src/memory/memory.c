@@ -43,20 +43,23 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 {
     //todo: pa3-3
     paddr_t paddr = laddr;
+    uint32_t res;
     
     if (cpu.cr0.pe && cpu.cr0.pg) {
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
             int i = 0;
             for (; ((laddr + i) >> 12) == (laddr >> 12); i++);
-            uint32_t res = paddr_read(page_translate(laddr), i);
-            printf("res1 = %x\n", res);
+            res = paddr_read(page_translate(laddr), i);
+            // printf("res1 = %x\n", res);
             res = res + ((paddr_read(page_translate(laddr + i), len - i)) << (8 * i));
-            printf("res2 = %x\n", res);
-            printf("you got me in page boundary! i = %d; len = %d\n", i, len);
-            fflush(stdout);            
-            assert(0);
+            // printf("res2 = %x\n", res);
+            // printf("you got me in page boundary! i = %d; len = %d\n", i, len);
+            // fflush(stdout);            
+            // assert(0);
+            return res;
         } else{
            paddr = page_translate(laddr);
+           return paddr_read(paddr, len);
         }
     }
     
