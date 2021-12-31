@@ -46,7 +46,9 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
     
     if (cpu.cr0.pe && cpu.cr0.pg) {
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
-            printf("you got me in page boundary!\n");
+            int i = 0;
+            for (; ((laddr + i) >> 12) == (laddr >> 12); i++);
+            printf("you got me in page boundary! i = %d; len = %d\n", i, len);
             fflush(stdout);            
             assert(0);
         } else{
@@ -64,8 +66,10 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
     
     if (cpu.cr0.pe && cpu.cr0.pg) {
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
-            printf("you got me in page boundary!\n");
-            fflush(stdout);    
+            int i = 0;
+            for (; ((laddr + i) >> 12) == (laddr >> 12); i++);
+            printf("you got me in page boundary! i = %d; len = %d\n", i, len);
+            fflush(stdout);            
             assert(0);
         } else{
            paddr = page_translate(laddr);
