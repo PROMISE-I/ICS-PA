@@ -44,7 +44,7 @@ uint32_t loader()
 			uint32_t paddr = ph->p_vaddr;
 #ifdef IA32_PAGE
             paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
-            //Log("vaddr: %X; paddr: %X",ph->p_vaddr, paddr);
+            Log("vaddr: %X; paddr: %X",ph->p_vaddr, paddr);
 #endif
 /* TODO: copy the segment from the ELF file to its proper memory area */
             memcpy((void *)paddr, (void *)ph->p_offset, ph->p_filesz);
