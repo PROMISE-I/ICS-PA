@@ -19,7 +19,7 @@ void raise_intr(uint8_t intr_no)
         cpu.eflags.IF = 0;        
     }
     //Set cs:eip to the entry of interrupt handler
-    cpu.cs = entry->segment;
+    cpu.cs.val = entry->segment;
     cpu.eip = (entry->offset_15_0 & 0xffff) + ((entry->offset_31_16 << 16) & 0xffff0000);
     //Reload cs with load_sreg()
     load_sreg(1);
