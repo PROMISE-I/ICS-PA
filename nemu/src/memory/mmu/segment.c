@@ -23,10 +23,10 @@ void load_sreg(uint8_t sreg)
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
 	 SegReg *segReg = &cpu.segReg[sreg];
-	 laddr_t addr = cpu.gdtr.base + (uint32_t)(segReg->index & 0x1fff);
+	 vaddr_t addr = cpu.gdtr.base + (uint32_t)(segReg->index & 0x1fff);
 	 SegDesc segDesc;
-	 segDesc.val[0] = laddr_read(addr, 4);
-	 segDesc.val[1] = laddr_read(addr + 4, 4);
+	 segDesc.val[0] = vaddr_read(addr, 4);
+	 segDesc.val[1] = vaddr_read(addr + 4, 4);
 	 
 	 //load invisible part from segDesc
 	 segReg->base = segDesc.base_15_0 + (segDesc.base_23_16 << 16) + (segDesc.base_31_24 << 24);
