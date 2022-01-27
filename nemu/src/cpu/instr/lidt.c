@@ -12,7 +12,7 @@ make_instr_func(lidt)
 
     //case for mod 11 -> register
     operand_read(&mem);
-    if (mem.type = OPR_REG) {
+    if (mem.type == OPR_REG) {
         mem.addr = mem.val;    
     }
 
