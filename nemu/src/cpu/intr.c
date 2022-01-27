@@ -1,10 +1,7 @@
 #include "cpu/intr.h"
 #include "cpu/instr.h"
 #include "memory/memory.h"
-
-#define entry->offset_15_0  vaddr_read(entry, 2)
-#define entry->offset_31_16 vaddr_read(entry+6, 2)
-#define enrty->selector     vaddr_read(entry+2, 2)
+   
 
 void raise_intr(uint8_t intr_no)
 {
@@ -24,8 +21,8 @@ void raise_intr(uint8_t intr_no)
     }
     
     //Set cs:eip to the entry of interrupt handler
-    cpu.eip = (entry->offset_15_0 & 0xffff) + ((entry->offset_31_16 << 16) & 0xffff0000);
-    cpu.cs.val = entry->selector;
+    cpu.eip = (vaddr_read(entry, 2) & 0xffff) + ((vaddr_read(entry+6, 2) << 16) & 0xffff0000);
+    cpu.cs.val = vaddr_read(entry+2, 2);
     printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
     fflush(stdout);
     //Reload cs with load_sreg()
