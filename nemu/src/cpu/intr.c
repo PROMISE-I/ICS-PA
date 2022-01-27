@@ -18,10 +18,11 @@ void raise_intr(uint8_t intr_no)
         printf("it is a interrupt!\n");
         cpu.eflags.IF = 0;        
     }
-    fflush(stdout);
     //Set cs:eip to the entry of interrupt handler
     cpu.cs.val = entry->selector;
     cpu.eip = (entry->offset_15_0 & 0xffff) + ((entry->offset_31_16 << 16) & 0xffff0000);
+    printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
+    fflush(stdout);
     //Reload cs with load_sreg()
     load_sreg(1);
 #endif
