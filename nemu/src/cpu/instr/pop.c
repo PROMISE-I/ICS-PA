@@ -57,12 +57,6 @@ make_instr_func(popa){
     make_instr_func(pop_ecx);
     make_instr_func(pop_eax);
     
-    
-    
-    
-    
-    
-    
     return 1;
 }
 
