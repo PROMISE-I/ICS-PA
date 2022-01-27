@@ -18,6 +18,7 @@ void raise_intr(uint8_t intr_no)
         printf("it is a interrupt!\n");
         cpu.eflags.IF = 0;        
     }
+    uint32_t temp = entry -> selector;
     fflush(stdout);
     //Set cs:eip to the entry of interrupt handler
     cpu.cs.val = entry->selector;

@@ -17,6 +17,7 @@ make_instr_func(int_)
     operand_read(&imm);
     
     raise_sw_intr(0x80);
-
+    
+    print_asm_0("int_", "b", 2);
     return 0;
 }

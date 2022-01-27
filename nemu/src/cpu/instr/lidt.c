@@ -34,6 +34,6 @@ make_instr_func(lidt)
     else {
         cpu.idtr.base = (base.val & 0xffffff);
     }
-
+    print_asm_0("lidt", "l", 3);
     return len;
 }
