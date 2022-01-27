@@ -21,8 +21,8 @@ void raise_intr(uint8_t intr_no)
     }
     
     //Set cs:eip to the entry of interrupt handler
-    cpu.eip = (vaddr_read(entry, 2) & 0xffff) + ((vaddr_read(entry+6, 2) << 16) & 0xffff0000);
-    cpu.cs.val = vaddr_read(entry+2, 2);
+    cpu.eip = (vaddr_read(entry, SREG_DS, 2) & 0xffff) + ((vaddr_read(entry+6, SREG_DS, 2) << 16) & 0xffff0000);
+    cpu.cs.val = vaddr_read(entry+2, SREG_DS, 2);
     printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
     fflush(stdout);
     //Reload cs with load_sreg()
