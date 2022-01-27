@@ -13,6 +13,7 @@ make_instr_func(lgdt)
         len += modrm_rm(eip+1, &rm);
 
         operand_read(&rm);
+        printf("rm.val: 0x%x\n",rm.val);
 
         limit.type = OPR_IMM;
         limit.data_size = 16;
