@@ -425,3 +425,9 @@ uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 #endif
 }
 
+uint32_t alu_neg(uint32_t src, dataz_size)
+{
+    cpu.eflags.CF = (src != 0);
+    return -src;
+}
+
