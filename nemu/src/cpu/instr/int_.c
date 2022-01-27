@@ -18,5 +18,5 @@ make_instr_func(int_)
     
     raise_sw_intr(0x80);
 
-    retrun 0;
+    return 0;
 }
