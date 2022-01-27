@@ -51,14 +51,14 @@ make_instr_func(push_cs){
 }
 
 make_instr_func(pusha){
-    make_instr_func(push_eax);
-    make_instr_func(push_ecx);    
-    make_instr_func(push_edx);
-    make_instr_func(push_ebx);
-    make_instr_func(push_esp);    
-    make_instr_func(push_ebp);
-    make_instr_func(push_esi);
-    make_instr_func(push_edi);
+    push_eax(0,0);
+    push_ecx(0,0);    
+    push_edx(0,0);
+    push_ebx(0,0);
+    push_esp(0,0);    
+    push_ebp(0,0);
+    push_esi(0,0);
+    push_edi(0,0);
     
     return 1;
 }

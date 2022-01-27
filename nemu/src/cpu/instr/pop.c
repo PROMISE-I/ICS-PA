@@ -48,14 +48,14 @@ make_instr_func(pop_cs){
 }
 
 make_instr_func(popa){
-    make_instr_func(pop_edi);
-    make_instr_func(pop_esi);
-    make_instr_func(pop_ebp);
-    make_instr_func(pop_esp);
-    make_instr_func(pop_ebx);
-    make_instr_func(pop_edx);
-    make_instr_func(pop_ecx);
-    make_instr_func(pop_eax);
+    pop_edi(0,0);
+    pop_esi(0,0);
+    pop_ebp(0,0);
+    pop_esp(0,0);
+    pop_ebx(0,0);
+    pop_edx(0,0);
+    pop_ecx(0,0);
+    pop_eax(0,0);
     
     return 1;
 }
