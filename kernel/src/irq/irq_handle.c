@@ -49,6 +49,7 @@ void irq_handle(TrapFrame *tf)
 	else if (irq >= 1000)
 	{
 		int irq_id = irq - 1000;
+        BREAK_BPOINT;
         panic("wrong irq_id: %d", irq_id);
 		assert(irq_id < NR_HARD_INTR);
 		if (irq_id == 0)
