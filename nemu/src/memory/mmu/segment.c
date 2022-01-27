@@ -23,7 +23,7 @@ void load_sreg(uint8_t sreg)
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
 	 SegReg *segReg = &cpu.segReg[sreg];
-	 vaddr_t addr = cpu.gdtr.base + (uint32_t)(segReg->index & 0x1fff);
+	 vaddr_t addr = cpu.gdtr.base + (uint32_t)((segReg->index & 0x1fff) * 8);
 	 SegDesc segDesc;
      printf("vaddr: 0x%x\n", addr);
      fflush(stdout);
