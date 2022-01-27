@@ -7,6 +7,7 @@ void raise_intr(uint8_t intr_no)
 {
 #ifdef IA32_INTR
     //Push eflags,cs,eip
+    printf("eip: 0x%x\n", cpu.eip);
     make_instr_func(push_eflags);
     make_instr_func(push_cs);
     make_instr_func(push_eip);
