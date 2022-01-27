@@ -11,7 +11,7 @@ make_instr_func(push_eflags){
     m.data_size = 32;
     m.sreg = SREG_DS;
     m.addr = cpu.esp;
-    m.val = sign_ext(cpu.cs.val, 16);
+    m.val = cpu.eflags.val;
     
     operand_write(&m);
     
@@ -43,7 +43,7 @@ make_instr_func(push_cs){
     m.data_size = 32;
     m.sreg = SREG_DS;
     m.addr = cpu.esp;
-    m.val = cpu.eflags.val;
+    m.val = sign_ext(cpu.cs.val, 16);
     
     operand_write(&m);
     
