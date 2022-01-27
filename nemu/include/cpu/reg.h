@@ -2,6 +2,13 @@
 #define __REG_H__
 
 #include "nemu.h"
+//define the IDTR
+
+typedef struct {
+    uint32_t base : 32;
+    uint32_t limit : 16;
+} IDTR;
+
 // define the GDTR
 typedef struct {
     uint32_t limit : 16;
