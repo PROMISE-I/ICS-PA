@@ -2,6 +2,10 @@
 #include "cpu/instr.h"
 #include "memory/memory.h"
 
+#define entry->offset_15_0  vaddr_read(entry, 2)
+#define entry->offset_31_16 vaddr_read(entry+6, 2)
+#define enrty->selector     vaddr_read(entry+2, 2)
+
 void raise_intr(uint8_t intr_no)
 {
 #ifdef IA32_INTR
@@ -11,8 +15,8 @@ void raise_intr(uint8_t intr_no)
     make_instr_func(push_eip);
     //find the IDT entry using 'inrt_no'
     printf("cpu.idtr: 0x%x, itro_no: 0x%x\n",cpu.idtr.base,intr_no);
-    GateDesc *entry = (GateDesc *)cpu.idtr.base + intr_no;
-    printf("entry: 0x%x\n", (uint32_t)entry);
+    vaddr_t vaddr = (GateDesc *)cpu.idtr.base + intr_no * 8;
+    printf("entry: 0x%x\n", entry);
     //Clear IF if it is an interrupt
     if (intr_no >= 1000) { //there is something wrong, intr_no in do_irq.S begins with 1000, while that begins with 32 in idt.c 
         printf("it is a interrupt!\n");
@@ -20,12 +24,10 @@ void raise_intr(uint8_t intr_no)
     }
     
     //Set cs:eip to the entry of interrupt handler
-
-    fflush(stdout);
     cpu.eip = (entry->offset_15_0 & 0xffff) + ((entry->offset_31_16 << 16) & 0xffff0000);
     cpu.cs.val = entry->selector;
     printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
-    
+    fflush(stdout);
     //Reload cs with load_sreg()
     load_sreg(1);
 #endif
