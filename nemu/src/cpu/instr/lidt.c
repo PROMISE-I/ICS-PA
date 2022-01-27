@@ -10,12 +10,6 @@ make_instr_func(lidt)
     mem.data_size = 32;
     len += modrm_rm(eip+1, &mem);
 
-    //case for mod 11 -> register
-    operand_read(&mem);
-    if (mem.type == OPR_REG) {
-        mem.addr = mem.val;    
-    }
-
     limit.type = OPR_MEM;
     limit.data_size = 16;
     limit.addr = mem.addr;
