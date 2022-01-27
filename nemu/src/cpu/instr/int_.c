@@ -17,4 +17,6 @@ make_instr_func(int_)
     operand_read(&imm);
     
     raise_sw_intr(0x80);
+
+    retrun 0;
 }
