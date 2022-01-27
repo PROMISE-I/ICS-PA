@@ -52,7 +52,7 @@ void irq_handle(TrapFrame *tf)
         //panic("edi: %u, esi: %u, ebp: %u, ebx: %u, edx: %u, ecx: %u, eax: %u, wrong irq_id: %u, error code: %u, eip: %u, cs: %u", tf->edi, tf->esi, tf->ebp, tf->ebx, tf->edx, tf->ecx, tf->eax, irq_id, tf->error_code, tf->eip, tf->cs);
 		assert(irq_id < NR_HARD_INTR);
 		if (irq_id == 0)
-			panic("You have hit a timer interrupt, remove this panic after you've figured out how the control flow gets here.");
+			//panic("You have hit a timer interrupt, remove this panic after you've figured out how the control flow gets here.");
 
 		struct IRQ_t *f = handles[irq_id];
 
