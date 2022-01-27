@@ -3,5 +3,5 @@
 /*
 Put the declarations of `neg' instructions here.
 */
-make_instr_func(neg_rm_l)
+make_instr_func(neg_rm_v)
 #endif
