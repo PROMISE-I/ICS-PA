@@ -12,7 +12,7 @@ void raise_intr(uint8_t intr_no)
     make_instr_func(push_eip);
     //find the IDT entry using 'inrt_no'
     printf("cpu.idtr: 0x%x, itro_no: 0x%x\n",cpu.idtr.base,intr_no);
-    vaddr_t vaddr = (GateDesc *)cpu.idtr.base + intr_no * 8;
+    vaddr_t entry = cpu.idtr.base + intr_no * 8;
     printf("entry: 0x%x\n", entry);
     //Clear IF if it is an interrupt
     if (intr_no >= 1000) { //there is something wrong, intr_no in do_irq.S begins with 1000, while that begins with 32 in idt.c 
