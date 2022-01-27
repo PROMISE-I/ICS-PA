@@ -31,8 +31,8 @@ make_instr_func(lgdt)
             cpu.gdtr.base = (base.val & 0xffffff);
         }
         print_asm_2("lgdt", "", 6, &limit, &base);
-        printf("base: %x, limit: %x\n", cpu.gdtr.base, cpu.gdtr.limit);
-        fflush(stdout);
+        //printf("base: %x, limit: %x\n", cpu.gdtr.base, cpu.gdtr.limit);
+        //fflush(stdout);
 #endif        
         return len;
 }
