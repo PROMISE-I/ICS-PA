@@ -8,4 +8,5 @@ make_instr_func(iret)
     pop_eip(0,0);
     pop_eflags(0,0);
     
+    return 1;
 }
