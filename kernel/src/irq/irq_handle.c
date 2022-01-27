@@ -49,7 +49,7 @@ void irq_handle(TrapFrame *tf)
 	else if (irq >= 1000)
 	{
 		int irq_id = irq - 1000;
-        panic("wrong irq_id: %u, eax: %u, ecx: %u, edx: %u, eip: %u, error code: %u", irq_id, tf->eax, tf->ecx, tf->ecx, tf->eip, tf->error_code);
+        panic("ebx: %u, edx: %u, ecx: %u, eax: %u, wrong irq_id: %u, error code: %u, eip: %u, cs: %u",tf->ebx, tf->edx, tf->ecx, tf->eax, irq_id, tf->error_code, tf->eip, tf->cs);
 		assert(irq_id < NR_HARD_INTR);
 		if (irq_id == 0)
 			panic("You have hit a timer interrupt, remove this panic after you've figured out how the control flow gets here.");
