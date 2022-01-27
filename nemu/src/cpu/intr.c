@@ -11,9 +11,6 @@ void raise_intr(uint8_t intr_no)
     push_cs(0,0);
     push_eip(0,0);
 
-    printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
-    fflush(stdout);
-
     //find the IDT entry using 'inrt_no'
     vaddr_t entry = cpu.idtr.base + intr_no * 8;
 

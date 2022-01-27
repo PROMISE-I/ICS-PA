@@ -25,8 +25,6 @@ void load_sreg(uint8_t sreg)
 	 SegReg *segReg = &cpu.segReg[sreg];
 	 vaddr_t addr = cpu.gdtr.base + (uint32_t)((segReg->index & 0x1fff) * 8);
 	 SegDesc segDesc;
-     printf("vaddr: 0x%x\n", addr);
-     fflush(stdout);
 	 segDesc.val[0] = vaddr_read(addr, SREG_DS, 4);
 	 segDesc.val[1] = vaddr_read(addr + 4, SREG_DS, 4);
 	 
