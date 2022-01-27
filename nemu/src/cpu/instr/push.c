@@ -2,6 +2,66 @@
 /*
 Put the implementations of `push' instructions here.
 */
+make_instr_func(push_eflags){
+    OPERAND m;
+    
+    cpu.esp -= 4;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    m.val = sign_ext(cpu.cs.val, 16);
+    
+    operand_write(&m);
+    
+    return 1;
+}
+
+make_instr_func(push_eip){
+    OPERAND m;
+    
+    cpu.esp -= 4;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    m.val = cpu.eip;
+    
+    operand_write(&m);
+    
+    return 1;    
+}
+
+make_instr_func(push_cs){
+    OPERAND m;
+    
+    cpu.esp -= 4;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    m.val = cpu.eflags.val;
+    
+    operand_write(&m);
+    
+    return 1;
+}
+
+make_instr_func(pusha){
+    make_instr_func(push_edi);
+    make_instr_func(push_esi);
+    make_instr_func(push_ebp);
+    make_instr_func(push_ebx);
+    make_instr_func(push_edx);
+    make_instr_func(push_ecx);
+    make_instr_func(push_eax);    
+    
+    return 1;
+}
+
 make_instr_func(push_eax){
     OPERAND m;
     

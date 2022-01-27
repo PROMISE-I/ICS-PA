@@ -3,6 +3,10 @@
 /*
 Put the declarations of `pop' instructions here.
 */
+make_instr_func(pop_eflags);
+make_instr_func(pop_eip);
+make_instr_func(pop_cs);
+make_instr_func(popa);
 make_instr_func(pop_eax);
 make_instr_func(pop_ecx);
 make_instr_func(pop_edx);

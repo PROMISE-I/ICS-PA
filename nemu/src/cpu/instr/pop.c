@@ -2,6 +2,63 @@
 /*
 Put the implementations of `pop' instructions here.
 */
+make_instr_func(pop_eflags){
+    OPERAND m;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    
+    operand_read(&m);
+    cpu.eflags.val = m.val;
+    cpu.esp += 4;
+    
+    return 1;
+}
+
+make_instr_func(pop_eip){
+    OPERAND m;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    
+    operand_read(&m);
+    cpu.eip = m.val;
+    cpu.esp += 4;
+    
+    return 1;
+}
+
+make_instr_func(pop_cs){
+    OPERAND m;
+    
+    m.type = OPR_MEM;
+    m.data_size = 32;
+    m.sreg = SREG_DS;
+    m.addr = cpu.esp;
+    
+    operand_read(&m);
+    cpu.cs.val = m.val;
+    cpu.esp += 4;
+    
+    return 1;
+}
+
+make_instr_func(popa){
+    make_instr_func(pop_eax);
+    make_instr_func(pop_ecx);
+    make_instr_func(pop_edx);
+    make_instr_func(pop_ebx);
+    make_instr_func(pop_ebp);
+    make_instr_func(pop_esi);
+    make_instr_func(pop_edi);
+    
+    return 1;
+}
+
 make_instr_func(pop_eax){
     OPERAND m;
     

@@ -3,6 +3,10 @@
 /*
 Put the declarations of `push' instructions here.
 */
+make_instr_func(push_eflags);
+make_instr_func(push_eip);
+make_instr_func(push_cs);
+make_instr_func(pusha);
 make_instr_func(push_eax);
 make_instr_func(push_ecx);
 make_instr_func(push_edx);
