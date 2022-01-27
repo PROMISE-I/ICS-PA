@@ -11,6 +11,9 @@ void raise_intr(uint8_t intr_no)
     make_instr_func(push_cs);
     make_instr_func(push_eip);
 
+    printf("cs:eip = 0x%x: 0x%x\n", cpu.cs.val, cpu.eip);
+    fflush(stdout);
+
     //find the IDT entry using 'inrt_no'
     vaddr_t entry = cpu.idtr.base + intr_no * 8;
 
@@ -19,11 +22,10 @@ void raise_intr(uint8_t intr_no)
         printf("it is a interrupt!\n");
         cpu.eflags.IF = 0;        
     }
-
+    
     //Set cs:eip to the entry of interrupt handler
     cpu.eip = (vaddr_read(entry, SREG_DS, 2) & 0xffff) + ((vaddr_read(entry+6, SREG_DS, 2) << 16) & 0xffff0000);
     cpu.cs.val = vaddr_read(entry+2, SREG_DS, 2);
-
     //Reload cs with load_sreg()
     load_sreg(1);
 #endif
