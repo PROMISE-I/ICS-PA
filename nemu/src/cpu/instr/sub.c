@@ -15,6 +15,7 @@ make_instr_impl_2op(sub, r, rm, b)
 make_instr_impl_2op(sub, r, rm, v)
 make_instr_impl_2op(sub, rm, r, b)
 make_instr_impl_2op(sub, rm, r, v)
+make_instr_impl_2op(sub, i, a, v)
 
 make_instr_func(sub_i2rm_bv){
     OPERAND imm, rm;

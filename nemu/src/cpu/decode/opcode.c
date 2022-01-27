@@ -12,7 +12,7 @@ instr_func opcode_entry[256] = {
     /* 0x20 - 0x23*/ and_r2rm_b, and_r2rm_v, and_rm2r_b, and_rm2r_v,
     /* 0x24 - 0x27*/ inv, and_i2a_v, inv, inv,
     /* 0x28 - 0x2b*/ sub_r2rm_b, sub_r2rm_v, sub_rm2r_b, sub_rm2r_v,
-    /* 0x2c - 0x2f*/ inv, inv, inv, inv,
+    /* 0x2c - 0x2f*/ inv, sub_i2a_v, inv, inv,
     /* 0x30 - 0x33*/ xor_r2rm_b, xor_r2rm_v, xor_rm2r_b, xor_rm2r_v,
     /* 0x34 - 0x37*/ inv, inv, inv, inv,
     /* 0x38 - 0x3b*/ cmp_r2rm_b, cmp_r2rm_v, cmp_rm2r_b, cmp_rm2r_v,
