@@ -64,21 +64,27 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     //todo: pa3-3
-    paddr_t paddr = laddr;
-    
+
     if (cpu.cr0.pe && cpu.cr0.pg) {
         if (((laddr + len - 1) >> 12) != (laddr >> 12)) {// data cross the page boundary
             int i = 0;
             for (; ((laddr + i) >> 12) == (laddr >> 12); i++);
-            printf("you got me in page boundary! i = %d; len = %d\n", i, len);
-            fflush(stdout);            
-            assert(0);
+            uint32_t dataH = data >> (8 * i);
+            uint32_t dataL = data - (dataH << (8 * i));
+
+            paddr_write(page_translate(laddr+i), len-i, dataH)
+            paddr_write(page_translate(laddr), i, dataL);
+            //printf("you got me in page boundary! i = %d; len = %d\n", i, len);
+            //fflush(stdout);            
+            //assert(0);
         } else{
-           paddr = page_translate(laddr);
+           paddr_write(page_translate(laddr), len, data);
         }
     }
+    else{
+        paddr_write(addr, len, data);
+    }
     
-    paddr_write(paddr, len, data);
 }
 
 uint32_t vaddr_read(vaddr_t vaddr, uint8_t sreg, size_t len)
