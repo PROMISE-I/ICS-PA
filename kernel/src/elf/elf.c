@@ -30,7 +30,7 @@ uint32_t loader()
 	elf = (void *)0x0;
 	Log("ELF loading from ram disk.");
 #endif
-
+    fflush(stdout);
 	/* Load each program segment */
 	ph = (void *)elf + elf->e_phoff;
 	eph = ph + elf->e_phnum;
