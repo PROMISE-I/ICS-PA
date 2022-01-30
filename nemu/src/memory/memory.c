@@ -82,7 +82,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
         }
     }
     else{
-        paddr_write(addr, len, data);
+        paddr_write(laddr, len, data);
     }
     
 }
