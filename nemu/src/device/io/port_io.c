@@ -91,12 +91,13 @@ void pio_write(uint16_t port, size_t len, uint32_t data)
 	//		break;
 	//	}
 	//}
-	if (i >= NR_PIO_ENTRY)
-	{
-		printf("PIO Write invalid port No. %d(0x%x)\n", port, port);
-		fflush(stdout);
-		assert(0);
-	}
+	//if (i >= NR_PIO_ENTRY)
+	//{
+	//	printf("PIO Write invalid port No. %d(0x%x)\n", port, port);
+	//	fflush(stdout);
+	//	assert(0);
+	//}
+    fflush(stdout);
 }
 
 // called by the in instruction
@@ -113,12 +114,13 @@ uint32_t pio_read(uint16_t port, size_t len)
 	//		break;
 	//	}
 	//}
-	if (i >= NR_PIO_ENTRY)
-	{
-		printf("PIO read invalid port No. %d(0x%x)\n", port, port);
-		fflush(stdout);
-		assert(0);
-	}
+	//if (i >= NR_PIO_ENTRY)
+	//{
+	//	printf("PIO read invalid port No. %d(0x%x)\n", port, port);
+	//	fflush(stdout);
+	//	assert(0);
+	//}
+    fflush(stdout);
 	return read_io_port(port, len);
 }
 
