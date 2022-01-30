@@ -11,7 +11,7 @@ make_pio_handler(handler_serial)
 		{ // offset == 0
 			char c = (char)read_io_port(port, 1);
 			putc(c, stdout);
-			fflush(stdout);
+			//fflush(stdout);
 		}
 #endif
 	}
