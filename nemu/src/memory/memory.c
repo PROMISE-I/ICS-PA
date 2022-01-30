@@ -72,7 +72,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
             uint32_t dataH = data >> (8 * i);
             uint32_t dataL = data - (dataH << (8 * i));
 
-            paddr_write(page_translate(laddr+i), len-i, dataH)
+            paddr_write(page_translate(laddr+i), len-i, dataH);
             paddr_write(page_translate(laddr), i, dataL);
             //printf("you got me in page boundary! i = %d; len = %d\n", i, len);
             //fflush(stdout);            
