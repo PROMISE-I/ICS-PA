@@ -13,6 +13,6 @@ make_instr_func(in_b)
 make_instr_func(in_l)
 {
     int len = 1;
-    cpu.gpr[0] = pio_read(cpu.gpr[2]._16, 4);
+    cpu.eax = pio_read(cpu.gpr[2]._16, 4);
     return len;
 }
