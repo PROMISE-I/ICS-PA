@@ -13,7 +13,7 @@
 #define IO_PORT_SPACE 65536
 static uint8_t io_port[IO_PORT_SPACE];
 
-//static struct pio_handler_map
+static struct pio_handler_map
 {
 	uint16_t port;
 	pio_handler handler;
@@ -82,22 +82,21 @@ void pio_write(uint16_t port, size_t len, uint32_t data)
 {
 	assert(len == 1 || len == 2 || len == 4);
 	write_io_port(port, len, data);
-	//int i = 0;
-	//for (; i < NR_PIO_ENTRY; i++)
-	//{
-	//	if (pio_handler_table[i].port == port)
-	//	{
-	//		pio_handler_table[i].handler(port, len, true);
-	//		break;
-	//	}
-	//}
-	//if (i >= NR_PIO_ENTRY)
-	//{
-	//	printf("PIO Write invalid port No. %d(0x%x)\n", port, port);
-	//	fflush(stdout);
-	//	assert(0);
-	//}
-    fflush(stdout);
+	int i = 0;
+	for (; i < NR_PIO_ENTRY; i++)
+	{
+		if (pio_handler_table[i].port == port)
+		{
+			pio_handler_table[i].handler(port, len, true);
+			break;
+		}
+	}
+	if (i >= NR_PIO_ENTRY)
+	{
+		printf("PIO Write invalid port No. %d(0x%x)\n", port, port);
+		fflush(stdout);
+		assert(0);
+	}
 }
 
 // called by the in instruction
@@ -105,22 +104,21 @@ uint32_t pio_read(uint16_t port, size_t len)
 {
 	assert(len == 1 || len == 2 || len == 4);
 	// call device read to put data into the port
-	//int i = 0;
-	//for (; i < NR_PIO_ENTRY; i++)
-	//{
-	//	if (pio_handler_table[i].port == port)
-	//	{
-	//		pio_handler_table[i].handler(port, len, false);
-	//		break;
-	//	}
-	//}
-	//if (i >= NR_PIO_ENTRY)
-	//{
-	//	printf("PIO read invalid port No. %d(0x%x)\n", port, port);
-	//	fflush(stdout);
-	//	assert(0);
-	//}
-    fflush(stdout);
+	int i = 0;
+	for (; i < NR_PIO_ENTRY; i++)
+	{
+		if (pio_handler_table[i].port == port)
+		{
+			pio_handler_table[i].handler(port, len, false);
+			break;
+		}
+	}
+	if (i >= NR_PIO_ENTRY)
+	{
+		printf("PIO read invalid port No. %d(0x%x)\n", port, port);
+		fflush(stdout);
+		assert(0);
+	}
 	return read_io_port(port, len);
 }
 
