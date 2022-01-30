@@ -13,7 +13,7 @@
 #define IO_PORT_SPACE 65536
 static uint8_t io_port[IO_PORT_SPACE];
 
-static struct pio_handler_map
+//static struct pio_handler_map
 {
 	uint16_t port;
 	pio_handler handler;
