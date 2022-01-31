@@ -20,7 +20,7 @@ void create_video_mapping()
     PDE *kpdir = get_kpdir();
     PDE *updir = get_updir();
 
-    memcpy(updir[VMEM_ADDR / PT_SIZE], kpdir[VMEM_ADDR / PT_SIZE],
+    memcpy(&updir[VMEM_ADDR / PT_SIZE], &kpdir[VMEM_ADDR / PT_SIZE],
 		   NR_PT * sizeof(PDE));
 }
 
