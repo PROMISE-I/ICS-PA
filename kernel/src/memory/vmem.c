@@ -16,6 +16,8 @@ void create_video_mapping()
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
+    memcpy(&updir[VMEM_ADDR / PT_SIZE], &kpdir[VMEM_ADDR / PT_SIZE],
+		   (VMEM_ADDR / PT_SIZE + 1) * sizeof(PDE));
 
 	panic("please implement me");
 }
